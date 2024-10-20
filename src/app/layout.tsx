@@ -1,24 +1,32 @@
 import "./globals.scss";
-import localFont from "next/font/local";
-import { Metal } from "next/font/google";
+import type { Metadata } from "next";
+import { Nunito } from "next/font/google";
+import Navbar from "@/components/Navbar/Navbar";
+import { Header } from "@/components/Home/Header/Header";
+import { Footer } from "@/components/Footer/Footer";
 
-const metal = Metal({ weight: "400", subsets: ["latin"] });
+const font = Nunito({ subsets: ["latin"] });
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
+export const metadata: Metadata = {
+  title: "Yanling",
+};
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} antialiased`}>
+      <body className={font.className}>
+        <Navbar />
+        {/* 
+        <ClientOnly>
+          <Navbar/>
+          <Header/>
+        </ClientOnly> */}
         {children}
+        <Footer />
       </body>
     </html>
   );

@@ -1,0 +1,37 @@
+.wrapper {
+  padding: 40px 0;
+  h2 {
+    font-family: impact, sans-serif;
+    font-size: 40px;
+    color: #343434;
+    text-align: center;
+
+    @media (max-width: 768px) {
+      font-size: 30px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 24px;
+    }
+  }
+
+  hr {
+    width: 3rem;
+    margin: 0 auto;
+    border: 2px solid #343434;
+  }
+  .card_group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 40px 0;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}

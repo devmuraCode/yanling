@@ -1,0 +1,28 @@
+.layout {
+  padding: 40px 0;
+  .btn{
+    font-family: impact, sans-serif;
+    font-size: 40px;
+    color: #343434;
+    text-align: center;
+    background: blue;
+  }
+  .grid_content {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr 3fr);
+    gap: 2rem;
+  }
+  .content_items {
+    width: 100%;
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      li {
+        padding: 10px 15px;
+        background: rgb(205, 203, 203);
+        cursor: pointer;
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.wrapper {
+  background: url(../../../assets/solutionheader.jpg) no-repeat center
+    center/cover;
+  width: 100%;
+  background-attachment: scroll;
+  min-height: 420px;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 350px;
+    .body_content {
+      text-align: center;
+      gap: 1rem;
+    }
+    h1 {
+      font-family: impact, sans-serif;
+      font-size: 40px;
+      color: #6baee9;
+      text-align: center;
+    }
+
+    p {
+      line-height: 1.75;
+      text-align: left;
+      font-size: 18px;
+      color: #343434;
+    }
+  }
+}
