@@ -1,9 +1,8 @@
-"use client"; // Добавляем директиву для клиентского компонента
+"use client"; 
 
-import Button from '../../Button'
-import Container from '../../Container'
-import Input from '../../Input'
+import Container from '@/components/Container';
 import styles from './ContactComponent.module.scss'
+import Input from '@/components/Input';
 
 export const ContactUsComponent = () => {
   return (

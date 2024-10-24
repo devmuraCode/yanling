@@ -3,7 +3,7 @@ import Aos from "aos";
 import 'aos/dist/aos.css';
 
 import Image from "next/image";
-import Container from "../../Container";
+import Container from "../../../../components/Container";
 import styled from "./AboutComponents.module.scss";
 
 

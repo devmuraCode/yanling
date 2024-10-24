@@ -1,5 +1,5 @@
 "use client";
-import Container from "../../Container";
+import Container from "@/components/Container";
 import styled from "./Solition.module.scss";
 import { MdComputer } from "react-icons/md";
 export const Solition = () => {

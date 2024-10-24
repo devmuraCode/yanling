@@ -2,7 +2,7 @@ import "./globals.scss";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
-import { Header } from "@/components/Home/Header/Header";
+import { Header } from "@/app/(home)/ui/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
 
 const font = Nunito({ subsets: ["latin"] });

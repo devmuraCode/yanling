@@ -1,5 +1,5 @@
-import { Header } from "@/components/SolutionsPage/Header/Header";
-import { Layout } from "@/components/SolutionsPage/layout";
+import { Header } from "@/app/solutions/ui/Header/Header";
+import { Layout } from "@/app/solutions/ui/Layout/Layout";
 
 const Solutions = () => {
   return (

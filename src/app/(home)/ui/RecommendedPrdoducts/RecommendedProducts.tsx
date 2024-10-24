@@ -1,5 +1,5 @@
-import { Card } from "../../Card/Card";
-import Container from "../../Container";
+import { Card } from "../../../../components/Card/Card";
+import Container from "../../../../components/Container";
 import styled from "./RecommendedProducts.module.scss";
 const RecommendedProducts = () => {
   return (

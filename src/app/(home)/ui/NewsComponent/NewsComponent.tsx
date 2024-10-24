@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Container from "../../Container";
+import Container from "../../../../components/Container";
 import styled from "./NewsComponent.module.scss";
 
 import news_1 from "@/assets/news_1.jpg";
