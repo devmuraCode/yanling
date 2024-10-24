@@ -1,4 +1,4 @@
-import Container from "../Container";
+import Container from "../../../../components/Container";
 import styles from "./Layout.module.scss";
 
 export const Layout = () => {

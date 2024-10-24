@@ -1,8 +1,12 @@
+import { AboutComponent } from "./ui/AboutComponent/AboutComponent";
+import { Header } from "./ui/Header/Header";
 
-
- const About = () => {
+const About = () => {
   return (
-    <div>About page</div>
-  )
-}
-export default About
+    <div>
+      <Header />
+      <AboutComponent/>
+    </div>
+  );
+};
+export default About;
