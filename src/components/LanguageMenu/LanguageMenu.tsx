@@ -18,11 +18,11 @@ export function LanguageMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">Open</Button>
+        <Button variant="outline">Language</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="">
         <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-          <DropdownMenuRadioItem value="en">
+          <DropdownMenuRadioItem value="en" className="flex gap-2">
             <Image
               src="https://upload.wikimedia.org/wikipedia/commons/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg"
               alt="United Kingdom Flag"
@@ -31,7 +31,7 @@ export function LanguageMenu() {
             />
             en
           </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="uz">
+          <DropdownMenuRadioItem value="uz" className="flex gap-2">
             <Image
               src="https://upload.wikimedia.org/wikipedia/commons/8/84/Flag_of_Uzbekistan.svg"
               alt="Uzbekistan Flag"
@@ -40,7 +40,7 @@ export function LanguageMenu() {
             />
             uz
           </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="spa">
+          <DropdownMenuRadioItem value="spa" className="flex gap-2">
             <Image
               src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg"
               alt="Spanish Flag"
