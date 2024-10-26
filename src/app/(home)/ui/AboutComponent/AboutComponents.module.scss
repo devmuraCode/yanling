@@ -1,3 +1,4 @@
+@import "../../../variables.scss";
 .wrapper {
   background: url(../../../../assets/bg_about.jpg) no-repeat center center/cover;
   border-radius: 5px;
@@ -11,7 +12,7 @@
   }
   h2 {
     font-family: impact, sans-serif;
-    font-size: 40px;
+    font-size: $h2-font-size;
     color: #fff;
     text-align: center;
 

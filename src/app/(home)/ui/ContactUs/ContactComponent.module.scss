@@ -1,11 +1,12 @@
+@import '../../../variables.scss';
 .wrapper {
-    background-color: rgba(245, 245, 245, 1);
+    background-color: $gray-bg-color;
     padding: 40px 0;
   
     h2 {
       font-family: impact, sans-serif;
-      font-size: 40px;
-      color: #343434;
+      font-size: $h2-font-size;
+      color: $h2-color-dark;
       text-align: center;
   
       @media (max-width: 768px) {
