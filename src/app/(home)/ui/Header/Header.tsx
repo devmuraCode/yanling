@@ -1,50 +1,39 @@
 "use client";
 import Image from "next/image";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import styles from "./Header.module.scss";
+import "slick-carousel/slick/slick-theme.css";
 
-import styled from "./Header.module.scss";
-
-import banner_1 from "@/assets/header_slide_1.jpg";
-import banner_2 from "@/assets/header_slide_2.jpg";
-import banner_3 from "@/assets/header_slide_3.jpg";
-
+import image from "@/assets/header_bg.jpg";
+import image_2 from "@/assets/header_bg_2.jpg";
 export const Header = () => {
+  var settings = {
+    dots: false,
+    infinite: true,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 2000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
   return (
-    <div className={styled.wrapper}>
-      <div className="carousel w-full">
-        <div id="slide1" className="carousel-item relative w-full">
-          <Image src={banner_2} alt="banner_3" />
-          <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-            <a href="#slide4" className="btn btn-circle">
-              ❮
-            </a>
-            <a href="#slide2" className="btn btn-circle">
-              ❯
-            </a>
+    <div className={styles.wrapper}>
+      <Slider {...settings}>
+        <div className={styles.image}>
+          <div className={styles.content}>
+            <h1>Keeping Your Network Safe</h1>
           </div>
         </div>
-        <div id="slide2" className="carousel-item relative w-full">
-          <Image src={banner_1} alt="banner_3" />
-          <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-            <a href="#slide1" className="btn btn-circle">
-              ❮
-            </a>
-            <a href="#slide3" className="btn btn-circle">
-              ❯
-            </a>
+        <div className={styles.image_2}>
+          <div className={styles.content}>
+            <div>
+              <h1>Fanless Mini PC</h1>
+              <p>Design for business, education and home application</p>
+            </div>
           </div>
         </div>
-        <div id="slide3" className="carousel-item relative w-full">
-          <Image src={banner_3} alt="banner_3" />
-          <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-            <a href="#slide2" className="btn btn-circle">
-              ❮
-            </a>
-            <a href="#slide4" className="btn btn-circle">
-              ❯
-            </a>
-          </div>
-        </div>
-      </div>
+      </Slider>
     </div>
   );
 };

@@ -1,8 +1,8 @@
 .wrapper {
   padding: 40px 0;
-  color: white;
-  background: #4e5561;
-
+  color: black;
+  background: #f7f7f7;
+  font-family: "FuturaPT", Arial, sans-serif;
   .icons_group {
     display: flex;
     flex-direction: column;
@@ -12,13 +12,17 @@
       display: flex;
       gap: 10px;
       font-size: 28px;
+
+      svg {
+        cursor: pointer;
+      }
     }
   }
 
   .menuItem {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
 
     h2 {
       font-size: 18px;
@@ -30,6 +34,46 @@
 
       li {
         font-size: 16px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .newsletter {
+    h2 {
+      font-size: 18px;
+    }
+
+    p {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .form {
+      display: flex;
+      gap: 8px;
+
+      input {
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: 200px;
+      }
+
+      button {
+        padding: 8px 16px;
+        font-size: 14px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #555;
+        }
       }
     }
   }
@@ -37,6 +81,7 @@
   .footer_content {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 
     @media (max-width: 768px) {
       flex-direction: column;
@@ -50,12 +95,17 @@
         margin: 0 auto;
       }
 
-      .menuItem h2 {
+      .menuItem h2,
+      .newsletter h2 {
         font-size: 20px;
       }
 
       .menuItem ul li {
         font-size: 16px;
+      }
+
+      .newsletter .form input {
+        width: 100%;
       }
     }
   }

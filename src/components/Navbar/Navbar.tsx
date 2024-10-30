@@ -1,3 +1,5 @@
+"use client";
+import { useState, useEffect } from "react";
 import Logo from "./Logo";
 import Container from "../Container";
 import UserMenu from "./UserMenu";
@@ -8,29 +10,38 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="">
-      <div className="w-full bg-white border-b-[1px] z-10 shadow-sm">
-        <div
-          className="
-                        py-4 
-                        
-                    "
-        >
+    <div
+      className={`fixed w-full z-10 transition duration-300 ${
+        isScrolled
+          ? "backdrop-blur-md bg-white/30 text-black"
+          : "bg-transparent text-white"
+      }`}
+    >
+      <div className="border-b-[1px]">
+        <div className="py-4">
           <Container>
-            <div
-              className="
-                            flex 
-                            flex-row 
-                            items-center 
-                            justify-between
-                            gap-3
-                            md:gap-0
-                        "
-            >
+            <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
               <Logo />
               <UserMenu />
-              <Language />
             </div>
           </Container>
         </div>

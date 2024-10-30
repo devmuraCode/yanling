@@ -1,33 +1,43 @@
 .wrapper {
-  background: url(../../../../assets/solutionheader.jpg) no-repeat center
-    center/cover;
+  background: linear-gradient(rgba(59, 59, 173, 0.7), rgba(59, 59, 173, 0.7)),
+    url(../../../../assets/solutionheader.jpg) no-repeat center center/cover;
   width: 100%;
-  background-attachment: scroll;
   min-height: 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "FuturaPT", Arial, sans-serif;
+  color: #ffffff;
 
   .content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(5px);
-    height: 350px;
+    text-align: center;
+    backdrop-filter: blur(4px);
+    padding: 2rem;
+    height: 100%;
+
     .body_content {
-      text-align: center;
-      gap: 1rem;
+      max-width: 600px;
+      gap: 1.2rem;
     }
+
     h1 {
-      font-family: impact, sans-serif;
-      font-size: 40px;
-      color: #6baee9;
-      text-align: center;
+      font-family: "Impact", sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #c8e0ff;
+      margin-bottom: 0.5rem;
     }
 
     p {
-      line-height: 1.75;
-      text-align: left;
-      font-size: 18px;
-      color: #343434;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: #e0e0e0;
+      max-width: 90%;
+      margin: 0 auto;
     }
   }
 }

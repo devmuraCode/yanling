@@ -2,8 +2,8 @@ import Logo from "../Navbar/Logo";
 import Container from "../Container";
 import styles from "./Footer.module.scss";
 
-import { CiFacebook, CiTwitter, CiYoutube } from "react-icons/ci";
-import MenuItem from "../Navbar/MenuList";
+import { CiFacebook, CiTwitter, CiYoutube, CiInstagram } from "react-icons/ci";
+
 export const Footer = () => {
   return (
     <div className={styles.wrapper}>
@@ -15,6 +15,7 @@ export const Footer = () => {
               <CiFacebook />
               <CiTwitter />
               <CiYoutube />
+              <CiInstagram />
             </div>
           </div>
           <div className={styles.menuItem}>
@@ -22,6 +23,7 @@ export const Footer = () => {
             <ul>
               <li>About Us</li>
               <li>Contacts</li>
+              <li>Our Location</li>
             </ul>
           </div>
           <div className={styles.menuItem}>
@@ -30,7 +32,24 @@ export const Footer = () => {
               <li>Technical support</li>
               <li>Repair</li>
               <li>FAQ</li>
+              <li>Shipping & Returns</li>
             </ul>
+          </div>
+          <div className={styles.menuItem}>
+            <h2>Legal</h2>
+            <ul>
+              <li>Privacy Policy</li>
+              <li>Terms of Service</li>
+              <li>Cookie Policy</li>
+            </ul>
+          </div>
+          <div className={styles.newsletter}>
+            <h2>Subscribe to our newsletter</h2>
+            <p>Get the latest updates on new products and upcoming sales</p>
+            <form className={styles.form}>
+              <input type="email" placeholder="Enter your email" />
+              <button type="submit">Subscribe</button>
+            </form>
           </div>
         </div>
       </Container>

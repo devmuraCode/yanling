@@ -1,6 +1,6 @@
 .wrapper {
-  background: linear-gradient(rgba(59, 59, 173, 0.6), rgba(59, 59, 173, 0.6)),
-    url(../../../../assets/about_header.jpg) no-repeat center center/cover;
+  background: linear-gradient(rgba(0, 27, 85, 0.7), rgba(0, 27, 85, 0.7)),
+    url(../../../../assets/products.jpg) no-repeat center center/cover;
   width: 100%;
   min-height: 420px;
   font-family: "FuturaPT", Arial, sans-serif;
@@ -23,17 +23,19 @@
     }
 
     h1 {
+      font-family: Impact, sans-serif;
       font-size: 40px;
-      color: #ffffff;
+      color: #ffffff; 
       margin-bottom: 0.5rem;
     }
 
     p {
       font-size: 18px;
-      color: #e0e0e0;
+      color: #d1d1d1;
       line-height: 1.75;
       max-width: 800px;
       margin: 0 auto;
+      text-align: center;
     }
   }
 }

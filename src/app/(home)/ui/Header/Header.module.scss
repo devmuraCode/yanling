@@ -1,0 +1,48 @@
+@import "../../../variables.scss";
+.wrapper {
+    overflow-x: hidden;
+  .image {
+    background: url(../../../../assets/header_bg.jpg) no-repeat center
+      center/cover;
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgb(59, 59, 173);
+    font-family: "FuturaPT", Arial, sans-serif;
+    .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 70vh;
+      h1 {
+        font-size: $h1-font-size;
+        color: #fff;
+        text-align: center;
+      }
+    }
+  }
+  .image_2 {
+    background: url(../../../../assets/header_bg_2.jpg) no-repeat center
+      center/cover;
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgb(59, 59, 173);
+    font-family: "FuturaPT", Arial, sans-serif;
+    .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 70vh;
+      h1 {
+        font-size: $h1-font-size;
+        color: #fff;
+        text-align: center;
+      }
+      p {
+        text-align: justify;
+        font-size: 20px;
+        color: #fff;
+        padding: 0.5rem 0 0 0;
+      }
+    }
+  }
+}
