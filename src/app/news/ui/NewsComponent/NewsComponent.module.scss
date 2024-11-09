@@ -1,22 +1,19 @@
 .wrapper {
-  background: #fff;
+  background: #f9f9f9;
   padding: 40px 0;
   font-family: "FuturaPT", Arial, sans-serif;
-  .news_group {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(1, 1fr);
+}
 
-    @media (min-width: 576px) {
-      grid-template-columns: repeat(1, 1fr);
-    }
+.newsGroup {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 
-    @media (min-width: 768px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-    @media (min-width: 1024px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

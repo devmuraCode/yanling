@@ -1,4 +1,4 @@
-import { Solition } from "./ui/Solution/Solition";
+import { Solutions } from "./ui/Solution/Solution";
 import { Header } from "@/app/(home)/ui/Header/Header";
 import { NewsComponent } from "@/app/(home)/ui/NewsComponent/NewsComponent";
 import { AboutComponent } from "@/app/(home)/ui/AboutComponent/AboutComponent";
@@ -9,7 +9,7 @@ export default function Home() {
     <div>
       <Header />
       <RecommendedProducts />
-      <Solition />
+      <Solutions />
       <AboutComponent />
       <NewsComponent />
     </div>

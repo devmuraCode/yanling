@@ -16,7 +16,10 @@ export const Card: React.FC<CardProps> = ({ title, description, date, imageUrl }
       <div className={styles.content}>
         <h2 className={styles.title}>{title}</h2>
         <p className={styles.description}>{description}</p>
-        <p className={styles.date}>{date}</p>
+        <div className={styles.footer}>
+          <p className={styles.date}>{date}</p>
+          <button className={styles.readMore}>Читать далее</button>
+        </div>
       </div>
     </div>
   );
