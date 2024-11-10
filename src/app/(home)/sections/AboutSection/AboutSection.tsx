@@ -4,12 +4,12 @@ import 'aos/dist/aos.css';
 
 import Image from "next/image";
 import Container from "../../../../components/Container";
-import styled from "./AboutComponents.module.scss";
+import styled from "./AboutSection.module.scss";
 
 
 import bg from "@/assets/yanlingoffice.jpg";
 import { useEffect } from "react";
-export const AboutComponent = () => {
+export const AboutSection = () => {
 
   useEffect(() => {
     Aos.init({

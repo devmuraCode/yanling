@@ -1,11 +1,11 @@
 "use client";
 import Container from "@/components/Container";
-import styled from "./Solution.module.scss";
+import styled from "./SolutionSection.module.scss";
 import { MdComputer } from "react-icons/md";
 import { FaServer, FaDatabase, FaCogs } from "react-icons/fa";
 import Link from "next/link";
 
-export const Solutions = () => {
+export const SolutionsSection = () => {
   return (
     <div className={styled.wrapper}>
       <Container>

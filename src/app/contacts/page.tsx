@@ -1,10 +1,10 @@
-import Contact from "./ui/Contact"
+import ContactSection from "./sections/ContactSection"
 
 
 const Contacts = () => {
   return (
     <div>
-        <Contact/>
+        <ContactSection/>
     </div>
   )
 }

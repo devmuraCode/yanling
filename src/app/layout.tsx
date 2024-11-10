@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
 import { Footer } from "@/components/Footer/Footer";
+import ReactQueryProvider from "@/lib/react-query-provider";
 
 const font = Nunito({ subsets: ["latin"] });
 
@@ -18,9 +19,11 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <Navbar />
-        {children}
-        <Footer />
+        <ReactQueryProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </ReactQueryProvider>
       </body>
     </html>
   );

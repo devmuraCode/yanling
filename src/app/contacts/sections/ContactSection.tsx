@@ -2,9 +2,9 @@ import Container from '@/components/Container';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
-import styles from './Contact.module.scss';
+import styles from './ContactSection.module.scss';
 
-const Contact = () => {
+const ContactSection = () => {
   return (
     <div className={styles.wrapper}>
       <Container>
@@ -52,4 +52,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default ContactSection;

@@ -1,11 +1,11 @@
-import { AboutComponent } from "./ui/AboutComponent/AboutComponent";
-import { Header } from "./ui/Header/Header";
+import { AboutSection } from "./sections/AboutSection/AboutSection";
+import { Header } from "./sections/Header/Header";
 
 const About = () => {
   return (
     <div>
       <Header />
-      <AboutComponent/>
+      <AboutSection/>
     </div>
   );
 };

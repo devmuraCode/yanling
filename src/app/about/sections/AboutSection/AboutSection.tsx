@@ -1,5 +1,5 @@
 import Container from "@/components/Container";
-import styles from "./AboutComponent.module.scss";
+import styles from "./AboutSection.module.scss";
 import img from '@/assets/about_yanling.jpg'
 import { FiTrendingUp } from "react-icons/fi";
 import {
@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 import IconWrapper from "./IconWrapper";
 import Image from "next/image";
-export const AboutComponent = () => {
+export const AboutSection = () => {
   return (
     <div className={styles.wrapper}>
       <Container>

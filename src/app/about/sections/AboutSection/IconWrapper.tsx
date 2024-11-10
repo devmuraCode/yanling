@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import styles from "./AboutComponent.module.scss";
+import styles from "./AboutSection.module.scss";
 
 interface IconWrapperProps {
   text: string;

@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Container from "../../../../components/Container";
-import styled from "./NewsComponent.module.scss";
+import styled from "./NewsSection.module.scss";
 
 import news_1 from "@/assets/news_1.jpg";
 import news_2 from "@/assets/news_2.jpg";
 import news_3 from "@/assets/news_3.jpg";
 
-export const NewsComponent = () => {
+export const NewsSection = () => {
   return (
     <div className={styled.wrapper}>
       <Container>

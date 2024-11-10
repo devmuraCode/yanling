@@ -1,11 +1,11 @@
-import { Header } from "./ui/Header/Header";
-import { NewsComponent } from "./ui/NewsComponent/NewsComponent";
+import { Header } from "./sections/Header/Header";
+import { NewsSection } from "./sections/NewsSection/NewsSection";
 
 const News = () => {
   return (
   <div>
     <Header/>
-    <NewsComponent/>
+    <NewsSection/>
   </div>
   )
 };

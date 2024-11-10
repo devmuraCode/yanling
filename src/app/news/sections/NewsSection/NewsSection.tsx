@@ -1,8 +1,8 @@
 import Container from "@/components/Container";
-import styles from "./NewsComponent.module.scss";
+import styles from "./NewsSection.module.scss";
 import { Card } from "../Card/Card";
 
-export const NewsComponent = () => {
+export const NewsSection = () => {
   const newsData = [
     {
       title: "Заголовок новости 1",
