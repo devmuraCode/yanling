@@ -1,10 +1,10 @@
-import React from 'react'
-import { Header } from './ui/Header/Header'
+import { Header } from "@/components/Header/Header"
+import bgSupport from '../../assets/support_bg.jpg'
 
  const Support = () => {
   return (
     <div>
-      <Header/>
+      <Header title="Support" description="We're here to help! Browse our resources or reach out to our team for assistance." image={bgSupport}/>
     </div>
   )
 }

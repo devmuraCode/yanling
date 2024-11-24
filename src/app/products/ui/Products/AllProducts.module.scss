@@ -18,42 +18,29 @@
     font-size: 1.5rem;
     margin-bottom: 10px;
   }
+}
 
-  ul {
-    list-style-type: none;
-    padding: 0;
+.menuList {
+  list-style-type: none;
+  padding: 0;
+}
 
-    li {
-      margin-bottom: 8px;
-      cursor: pointer;
-      &:hover {
-        color: #0070f3;
-      }
-    }
+.menuItem {
+  margin-bottom: 8px;
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    color: #0070f3;
   }
 }
 
-.products {
-  display: flex;
-  flex-direction: column;
+.categoryLink {
+  padding: 5px;
+}
 
-  h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-
-  .productList {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-  }
-
-  .productCard {
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
+.subMenu {
+  margin-left: 15px;
+  border-left: 2px solid #ddd;
+  padding-left: 10px;
 }

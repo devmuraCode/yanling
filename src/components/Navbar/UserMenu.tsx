@@ -14,6 +14,9 @@ const UserMenu: React.FC = () => {
           <Link href="/products">
             <MenuItem label="Products" />
           </Link>
+          <Link href="/ourproducts">
+            <MenuItem label="Our Products" />
+          </Link>
           <Link href="/solutions">
             <MenuItem label="Solutions" />
           </Link>

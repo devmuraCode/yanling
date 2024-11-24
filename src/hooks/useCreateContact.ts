@@ -1,6 +1,5 @@
-"use client";
 import { useMutation } from "@tanstack/react-query";
-import { IContactForm, sendContactForm } from "@/api/contacts";
+import { IContactForm, sendContactForm } from "@/services/contacts";
 
 export default function useContactForm() {
   return useMutation({

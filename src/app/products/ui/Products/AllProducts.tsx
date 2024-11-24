@@ -1,19 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import Container from "@/components/Container";
 import styles from "./AllProducts.module.scss";
-import ProductCard from "../ProductCard/ProductCard";
+import Container from "@/components/Container";
 import { useCategories } from "@/hooks/useCategories";
-import { Menu, MenuItem } from "@shadcn/ui";
-import { Category } from "@/api/categories";
+import { Category } from "@/services/getCategoriesList";
 
 export const AllProducts: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const { data: categories, isLoading, isError } = useCategories();
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const [openCategories, setOpenCategories] = useState<Set<number>>(new Set());
+  const { data: categories, isError } = useCategories();
 
   if (isError || !categories) {
     return <div>Error loading categories.</div>;
@@ -23,15 +18,55 @@ export const AllProducts: React.FC = () => {
     setSelectedCategory(categoryId);
   };
 
-  const generateMenuItems = (categories: Category[]): { id: string; text: string; children?: any[] }[] => {
-    return categories.map((category) => ({
-      id: category.id.toString(),
-      text: category.name,
-      children: category.children ? generateMenuItems(category.children) : [],
-    }));
+  const toggleCategory = (categoryId: number) => {
+    setOpenCategories((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(categoryId)) {
+        newSet.delete(categoryId);
+      } else {
+        newSet.add(categoryId);
+      }
+      return newSet;
+    });
   };
 
-  const menuItems = generateMenuItems(categories);
+  const renderCategories = (categories: Category[]) => {
+    return (
+      <ul className={styles.menuList}>
+        {categories.map((category) => (
+          <li key={category.id} className={styles.menuItem}>
+            <div
+              onClick={() => {
+                handleCategoryChange(category.id.toString());
+                toggleCategory(category.id);
+              }}
+              className={styles.categoryLink}
+            >
+              {category.name}
+            </div>
+            {Array.isArray(category.children) &&
+              category.children.length > 0 &&
+              openCategories.has(category.id) && (
+                <ul className={styles.subMenu}>
+                  {category.children.map((child) => (
+                    <li key={child.id} className={styles.menuItem}>
+                      <div
+                        onClick={() =>
+                          handleCategoryChange(child.id.toString())
+                        }
+                        className={styles.categoryLink}
+                      >
+                        {child.name}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+          </li>
+        ))}
+      </ul>
+    );
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -39,27 +74,10 @@ export const AllProducts: React.FC = () => {
         <div className={styles.layout}>
           <aside className={styles.sidebar}>
             <h2>Категории</h2>
-            <Menu>
-              {menuItems.map((category) => (
-                <MenuItem key={category.id} onClick={() => handleCategoryChange(category.id)}>
-                  {category.text}
-                  {category.children && (
-                    <div className={styles.subMenu}>
-                      {category.children.map((child) => (
-                        <MenuItem key={child.id} onClick={() => handleCategoryChange(child.id)}>
-                          {child.text}
-                        </MenuItem>
-                      ))}
-                    </div>
-                  )}
-                </MenuItem>
-              ))}
-            </Menu>
+            {renderCategories(categories)}
           </aside>
           <main className={styles.products}>
-            <div className={styles.productList}>
-              {/* Map through products to display them here */}
-            </div>
+            <div className={styles.productList}>{/* ProductCard */}</div>
           </main>
         </div>
       </Container>

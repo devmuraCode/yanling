@@ -3,10 +3,11 @@
   padding: 40px 0;
   font-family: "FuturaPT", Arial, sans-serif;
   h2 {
+    font-family: impact, sans-serif;
     font-size: $h2-font-size;
     color: $h2-color-dark;
     text-align: center;
-    font-family: impact, sans-serif;
+
     @media (max-width: 768px) {
       font-size: 30px;
     }
@@ -20,19 +21,5 @@
     width: 3rem;
     margin: 0 auto;
     border: 2px solid #343434;
-  }
-  .card_group {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    padding: 40px 0;
-    
-    @media (max-width: 768px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    @media (max-width: 480px) {
-      grid-template-columns: repeat(1, 1fr);
-    }
   }
 }

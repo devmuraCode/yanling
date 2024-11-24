@@ -1,7 +1,9 @@
 .wrapper {
-  background: linear-gradient(rgba(59, 59, 173, 0.7), rgba(59, 59, 173, 0.7)), 
-    url(../../../../assets/about_header.jpg) no-repeat center center/cover;
-  background-attachment: scroll;
+  background: linear-gradient(rgba(0, 27, 85, 0.7), rgba(0, 27, 85, 0.7));
+  background-size: cover; 
+  background-position: center;
+  background-repeat: no-repeat; 
+  background-attachment: scroll; 
   width: 100%;
   min-height: 420px;
   display: flex;
@@ -31,7 +33,7 @@
       color: #e0f7ff;
       margin-bottom: 0.5rem;
     }
-  
+
     p {
       font-size: 1.125rem;
       line-height: 1.6;

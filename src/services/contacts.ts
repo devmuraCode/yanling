@@ -1,4 +1,4 @@
-import axiosInstance from "@/services/axiosInstance";
+import axiosInstance from "@/api/axiosInstance";
 
 export interface IContactForm {
   name: string;
