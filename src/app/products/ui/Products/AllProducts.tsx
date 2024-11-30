@@ -1,17 +1,42 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./AllProducts.module.scss";
 import Container from "@/components/Container";
 import { useCategories } from "@/hooks/useCategories";
 import { Category } from "@/services/getCategoriesList";
+import {
+  ProductShortInfo,
+  getShortInfoByCategoryId,
+} from "@/services/getFieldDetailsByCategoryId";
+import ProductCard from "../ProductCard/ProductCard";
 
 export const AllProducts: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [openCategories, setOpenCategories] = useState<Set<number>>(new Set());
+  const [products, setProducts] = useState<ProductShortInfo[] | null>(null);
   const { data: categories, isError } = useCategories();
 
-  if (isError || !categories) {
-    return <div>Error loading categories.</div>;
+  useEffect(() => {
+    if (selectedCategory !== "all") {
+      const fetchProducts = async () => {
+        try {
+          const data = await getShortInfoByCategoryId(Number(selectedCategory));
+          setProducts(data);
+        } catch (error) {
+          console.error("Ошибка загрузки продуктов:", error);
+        }
+      };
+
+      fetchProducts();
+    }
+  }, [selectedCategory]);
+
+  if (isError) {
+    return <div>Ошибка загрузки категорий. Попробуйте обновить страницу.</div>;
+  }
+
+  if (!categories) {
+    return <div>Загрузка категорий...</div>;
   }
 
   const handleCategoryChange = (categoryId: string) => {
@@ -30,43 +55,39 @@ export const AllProducts: React.FC = () => {
     });
   };
 
-  const renderCategories = (categories: Category[]) => {
-    return (
-      <ul className={styles.menuList}>
-        {categories.map((category) => (
-          <li key={category.id} className={styles.menuItem}>
-            <div
-              onClick={() => {
-                handleCategoryChange(category.id.toString());
-                toggleCategory(category.id);
-              }}
-              className={styles.categoryLink}
-            >
-              {category.name}
-            </div>
-            {Array.isArray(category.children) &&
-              category.children.length > 0 &&
-              openCategories.has(category.id) && (
-                <ul className={styles.subMenu}>
-                  {category.children.map((child) => (
-                    <li key={child.id} className={styles.menuItem}>
-                      <div
-                        onClick={() =>
-                          handleCategoryChange(child.id.toString())
-                        }
-                        className={styles.categoryLink}
-                      >
-                        {child.name}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              )}
-          </li>
-        ))}
-      </ul>
-    );
-  };
+  const renderCategories = (categories: Category[]) => (
+    <ul className={styles.menuList}>
+      {categories.map((category) => (
+        <li key={category.id} className={styles.menuItem}>
+          <div
+            onClick={() => {
+              handleCategoryChange(category.id.toString());
+              toggleCategory(category.id);
+            }}
+            className={styles.categoryLink}
+          >
+            {category.name}
+          </div>
+          {Array.isArray(category.children) &&
+            category.children.length > 0 &&
+            openCategories.has(category.id) && (
+              <ul className={styles.subMenu}>
+                {category.children.map((child) => (
+                  <li key={child.id} className={styles.menuItem}>
+                    <div
+                      onClick={() => handleCategoryChange(child.id.toString())}
+                      className={styles.categoryLink}
+                    >
+                      {child.name}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+        </li>
+      ))}
+    </ul>
+  );
 
   return (
     <div className={styles.wrapper}>
@@ -77,7 +98,24 @@ export const AllProducts: React.FC = () => {
             {renderCategories(categories)}
           </aside>
           <main className={styles.products}>
-            <div className={styles.productList}>{/* ProductCard */}</div>
+            <div className={styles.productList}>
+              {products ? (
+                products.map((product) => {
+                  const mainImage = product.files.find((file) => file.main);
+                  const image = mainImage ? mainImage.filePath : "";
+
+                  return (
+                    <ProductCard
+                      key={product.id}
+                      image={image}
+                      name={product.name}
+                    />
+                  );
+                })
+              ) : (
+                <p>Выберите категорию для отображения продуктов.</p>
+              )}
+            </div>
           </main>
         </div>
       </Container>

@@ -44,3 +44,7 @@
   border-left: 2px solid #ddd;
   padding-left: 10px;
 }
+.productList{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
