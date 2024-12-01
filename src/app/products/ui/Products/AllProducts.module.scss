@@ -7,6 +7,10 @@
   display: grid;
   grid-template-columns: 1fr 3fr;
   gap: 20px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .sidebar {
@@ -17,6 +21,10 @@
   h2 {
     font-size: 1.5rem;
     margin-bottom: 10px;
+
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+    }
   }
 }
 
@@ -37,14 +45,39 @@
 
 .categoryLink {
   padding: 5px;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 }
 
 .subMenu {
   margin-left: 15px;
   border-left: 2px solid #ddd;
   padding-left: 10px;
+
+  @media (max-width: 768px) {
+    margin-left: 10px;
+    padding-left: 8px;
+  }
 }
-.productList{
+
+.products {
+  display: flex;
+  flex-direction: column;
+}
+
+.productList {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 }

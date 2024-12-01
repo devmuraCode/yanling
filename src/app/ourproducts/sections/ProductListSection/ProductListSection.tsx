@@ -13,9 +13,9 @@ export const ProductListSection = async () => {
             <div>
                 <h2>Our Products</h2>
             </div>
-            <div>
+            <div className={styles.productList}>
                 {products.map((product: CompanyProduct) => (
-                  <ProductCard key={product.id} image={product.filePath} name={product.title}/>
+                  <ProductCard key={product.id} image={product.filePath} name={product.title} description={product.description}/>
                 ))}
             </div>
         </Container>

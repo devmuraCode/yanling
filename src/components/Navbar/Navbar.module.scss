@@ -1,0 +1,41 @@
+.navbar {
+  border-bottom: 1px solid #ddd;
+
+  .navbarContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .menuToggle {
+    display: block;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: black;
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  .menuItems {
+    display: none;
+
+    @media (min-width: 768px) {
+      display: flex;
+      gap: 1.5rem;
+    }
+  }
+
+  .menuItemsActive {
+    display: block;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: white;
+    z-index: 1;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}

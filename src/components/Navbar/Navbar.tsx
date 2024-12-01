@@ -1,47 +1,51 @@
 "use client";
-import { useState, useEffect } from "react";
+
+import { useState } from "react";
 import Logo from "./Logo";
 import Container from "../Container";
 import UserMenu from "./UserMenu";
-import Language from "./Language";
+import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import styles from "./Navbar.module.scss";
 
-interface NavbarProps {
-  currentUser?: any;
-}
+const Navbar: React.FC = () => {
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen((prev) => !prev);
+  };
 
   return (
     <div
-      className={`fixed w-full z-10 transition duration-300 ${
-        isScrolled
-          ? "backdrop-blur-md bg-white/30 text-black"
-          : "bg-transparent text-white"
-      }`}
+      className={`transition duration-300 bg-white text-black ${styles.navbar}`}
     >
       <div className="border-b-[1px]">
         <div className="py-4">
           <Container>
-            <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
+            <div
+              className={`flex items-center justify-between ${styles.navbarContent}`}
+            >
               <Logo />
-              <UserMenu />
+
+              <div className="md:hidden">
+                <button
+                  onClick={toggleMobileMenu}
+                  className={styles.menuToggle}
+                >
+                  {isMobileMenuOpen ? (
+                    <AiOutlineClose className="text-2xl" />
+                  ) : (
+                    <AiOutlineMenu className="text-2xl" />
+                  )}
+                </button>
+              </div>
+
+              <div
+                className={`md:flex ${
+                  isMobileMenuOpen ? styles.menuItemsActive : styles.menuItems
+                }`}
+              >
+                <UserMenu />
+              </div>
             </div>
           </Container>
         </div>

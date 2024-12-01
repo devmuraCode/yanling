@@ -9,12 +9,21 @@ import {
   getShortInfoByCategoryId,
 } from "@/services/getFieldDetailsByCategoryId";
 import ProductCard from "../ProductCard/ProductCard";
+import { useRouter } from "next/navigation";
+import {
+  getProductDetails,
+  IProductDetails,
+} from "@/services/getProductDetails";
+import { getProductFieldDetails } from "@/services/getProductFiledDetails";
 
 export const AllProducts: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [openCategories, setOpenCategories] = useState<Set<number>>(new Set());
   const [products, setProducts] = useState<ProductShortInfo[] | null>(null);
+  const [productDetails, setProductDetails] = useState<IProductDetails | null>(null);
+  const [productFieldDetails, setProductFieldDetails] = useState<any | null>(null);
   const { data: categories, isError } = useCategories();
+  const router = useRouter();
 
   useEffect(() => {
     if (selectedCategory !== "all") {
@@ -30,6 +39,22 @@ export const AllProducts: React.FC = () => {
       fetchProducts();
     }
   }, [selectedCategory]);
+
+  const handleProductClick = async (productId: number) => {
+    try {
+      const [details, fieldDetails] = await Promise.all([
+        getProductDetails(productId),
+        getProductFieldDetails(productId),
+      ]);
+
+      setProductDetails(details);
+      setProductFieldDetails(fieldDetails);
+
+      router.push(`/productDetails/${productId}`);
+    } catch (error) {
+      console.error("Ошибка получения деталей продукта:", error);
+    }
+  };
 
   if (isError) {
     return <div>Ошибка загрузки категорий. Попробуйте обновить страницу.</div>;
@@ -107,8 +132,11 @@ export const AllProducts: React.FC = () => {
                   return (
                     <ProductCard
                       key={product.id}
+                      id={product.id}
                       image={image}
                       name={product.name}
+                      price={product.price}
+                      onClick={() => handleProductClick(product.id)}
                     />
                   );
                 })

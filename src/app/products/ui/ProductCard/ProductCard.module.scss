@@ -10,7 +10,7 @@
   align-items: center;
   text-align: center;
   position: relative;
-  
+
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
@@ -40,7 +40,9 @@
 }
 
 .content {
+  width: 100%;
   margin-top: 10px;
+  text-align: start;
 }
 
 .name {
@@ -55,29 +57,20 @@
   font-weight: bold;
 }
 
-.installment {
-  display: inline-block;
-  margin-top: 5px;
-  padding: 5px 10px;
-  font-size: 12px;
-  color: #ffcc00;
-  background-color: #f7e6a1;
-  border-radius: 4px;
-}
-
 .button {
   margin-top: 10px;
   padding: 8px 15px;
   font-size: 14px;
   font-weight: 600;
-  color: #fff;
-  background-color: #e60000;
-  border: none;
+  color: #000;
+  background: outline;
+  border: 1px solid blue;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #cc0000;
+    background-color: blue;
+    color: #fff;
   }
 }

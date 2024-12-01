@@ -6,6 +6,10 @@ import styles from "./ContactSection.module.scss";
 import { Textarea } from "@/components/ui/textarea";
 import useContactForm from "@/hooks/useCreateContact";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { getCompanyAdress } from "@/services/getCompanyAdress";
+import { Adress } from "./Adress/Adress";
+// import { toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 
 const ContactSection = () => {
   const { mutate: sendForm, isPending } = useContactForm();
@@ -13,6 +17,20 @@ const ContactSection = () => {
   const [phone, setPhone] = useState("+998");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [company, setCompany] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchCompanyAdress = async () => {
+      try {
+        const data = await getCompanyAdress();
+        setCompany(data);
+      } catch (error) {
+        console.error("Ошибка при получении адреса компании", error);
+      }
+    };
+
+    fetchCompanyAdress();
+  }, []);
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -25,7 +43,21 @@ const ContactSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    sendForm({ name, phone, email, message });
+    sendForm(
+      { name, phone, email, message },
+      {
+        onSuccess: () => {
+          // toast.success("Форма успешно отправлена!");
+          setName("");
+          setPhone("+998");
+          setEmail("");
+          setMessage("");
+        },
+        onError: () => {
+          console.log("Ошибка при отправке формы. Попробуйте еще раз.");
+        },
+      }
+    );
   };
 
   return (
@@ -75,39 +107,7 @@ const ContactSection = () => {
           </div>
 
           <div className={styles.infoSection}>
-            <h2>МЫ НА СВЯЗИ</h2>
-            <div className={styles.contactDetails}>
-              <p>+998 555 020 222</p>
-              <p>sales@kpi.uz</p>
-              <p>
-                DataSite Technology, 100100, Узбекистан, г. Ташкент, ул.
-                Экширом-2, д.8
-              </p>
-            </div>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=..."
-              width="100%"
-              height="200"
-              allowFullScreen
-              loading="lazy"
-            ></iframe>
-            <div className={styles.socials}>
-              <p>Мы в соц. сетях</p>
-              <div className={styles.icons}>
-                <a href="#">
-                  <FaFacebook />
-                </a>
-                <a href="#">
-                  <FaTwitter />
-                </a>
-                <a href="#">
-                  <FaInstagram />
-                </a>
-                <a href="#">
-                  <FaLinkedin />
-                </a>
-              </div>
-            </div>
+            {company && <Adress company={company} />}
           </div>
         </div>
       </Container>

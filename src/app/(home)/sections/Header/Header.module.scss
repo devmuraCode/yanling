@@ -1,48 +1,73 @@
 @import "../../../variables.scss";
+
 .wrapper {
-    overflow-x: hidden;
+  overflow-x: hidden;
+
+  .slick-dots {
+    bottom: 20px;
+  }
+
   .image {
-    background: url(../../../../assets/header_bg.jpg) no-repeat center
-      center/cover;
+    background: url(../../../../assets/header_bg.jpg) no-repeat center center/cover;
     width: 100%;
     min-height: 100vh;
     background-color: rgb(59, 59, 173);
     font-family: "FuturaPT", Arial, sans-serif;
+
     .content {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 80vh;
-      h1 {
+      text-align: center;
+
+      .title {
         font-size: $h1-font-size;
         color: #fff;
-        text-align: center;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        animation: fadeIn 2s ease-in-out;
       }
     }
   }
+
   .image_2 {
-    background: url(../../../../assets/header_bg_2.jpg) no-repeat center
-      center/cover;
+    background: url(../../../../assets/header_bg_2.jpg) no-repeat center center/cover;
     width: 100%;
     min-height: 100vh;
     background-color: rgb(59, 59, 173);
     font-family: "FuturaPT", Arial, sans-serif;
     .content {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 80vh;
-      h1 {
+      text-align: center;
+
+      .title {
         font-size: $h1-font-size;
         color: #fff;
-        text-align: center;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        animation: fadeIn 2s ease-in-out;
       }
-      p {
+
+      .subtitle {
         text-align: justify;
         font-size: 20px;
         color: #fff;
         padding: 0.5rem 0 0 0;
+        animation: fadeIn 2s ease-in-out;
       }
     }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
