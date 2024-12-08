@@ -4,7 +4,7 @@ import { getProductDetails, IProductDetails } from "@/services/getProductDetails
 import { useParams } from "next/navigation";
 import { DetailsCard } from "../sections/DetailsCard";
 import { getProductFieldDetails } from "@/services/getProductFiledDetails";
-import Loading from "@/app/loading";
+import Loading from "@/app/Loading";
 
 const ProductDetail: FC = () => {
   const { id } = useParams();
