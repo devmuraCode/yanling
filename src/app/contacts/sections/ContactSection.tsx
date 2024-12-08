@@ -8,8 +8,6 @@ import useContactForm from "@/hooks/useCreateContact";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { getCompanyAdress } from "@/services/getCompanyAdress";
 import { Adress } from "./Adress/Adress";
-// import { toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
 
 const ContactSection = () => {
   const { mutate: sendForm, isPending } = useContactForm();
@@ -47,7 +45,6 @@ const ContactSection = () => {
       { name, phone, email, message },
       {
         onSuccess: () => {
-          // toast.success("Форма успешно отправлена!");
           setName("");
           setPhone("+998");
           setEmail("");

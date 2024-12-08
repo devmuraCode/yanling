@@ -55,15 +55,16 @@
   font-size: 14px;
   color: #e60000;
   font-weight: bold;
+  padding: 1rem 0;
 }
 
 .button {
-  margin-top: 10px;
+  margin-top: 3rem; 
   padding: 8px 15px;
   font-size: 14px;
   font-weight: 600;
   color: #000;
-  background: outline;
+  background: none;
   border: 1px solid blue;
   border-radius: 4px;
   cursor: pointer;
@@ -74,3 +75,4 @@
     color: #fff;
   }
 }
+

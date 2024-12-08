@@ -4,6 +4,7 @@ import { getProductDetails, IProductDetails } from "@/services/getProductDetails
 import { useParams } from "next/navigation";
 import { DetailsCard } from "../sections/DetailsCard";
 import { getProductFieldDetails } from "@/services/getProductFiledDetails";
+import Loading from "@/app/loading";
 
 const ProductDetail: FC = () => {
   const { id } = useParams();
@@ -33,7 +34,7 @@ const ProductDetail: FC = () => {
   console.log(productFieldDetails);
 
   if (!productDetails) {
-    return <div>Загрузка деталей продукта...</div>;
+    return <div><Loading/></div>;
   }
 
   return (

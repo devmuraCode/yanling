@@ -1,15 +1,13 @@
 .wrapper {
-  background-color: #f9f9f9;
-  padding: 20px;
+  padding: 5rem 0;
 }
-
 .card {
   display: flex;
-  gap: 20px;
+  gap: 30px;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  flex-wrap: wrap;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -23,6 +21,7 @@
   .mainImage {
     width: 100%;
     border-radius: 8px;
+    object-fit: contain;
   }
 
   .thumbnailCarousel {
@@ -36,6 +35,7 @@
       font-size: 24px;
       cursor: pointer;
       color: #333;
+      margin: 0 20px;
 
       &:hover {
         color: #007bff;
@@ -44,15 +44,15 @@
 
     .thumbnails {
       display: flex;
-      gap: 10px;
+      gap: 3rem;
       overflow-x: auto;
 
       img {
-        width: 50px;
-        height: 50px;
+        width: 100px;
+        height: 100px;
         object-fit: cover;
         border: 2px solid #ddd;
-        border-radius: 4px;
+        border-radius: 8px;
         cursor: pointer;
         transition: border-color 0.3s ease;
 
@@ -63,6 +63,11 @@
         &.activeThumbnail {
           border-color: #007bff;
         }
+
+        &.selectedThumbnail {
+          border-color: #007bff;
+          border-width: 3px;
+        }
       }
     }
   }
@@ -71,11 +76,12 @@
 .detailsSection {
   flex: 1;
   padding: 20px;
+  width: 100%;
 
   .productName {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
 
   .description {
@@ -85,7 +91,7 @@
   }
 
   .price {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     color: #007bff;
     margin-bottom: 20px;
@@ -95,15 +101,15 @@
     margin-top: 20px;
 
     h2 {
-      font-size: 20px;
-      margin-bottom: 10px;
+      font-size: 22px;
+      margin-bottom: 15px;
     }
 
     .category {
-      margin-bottom: 20px;
+      margin-bottom: 25px;
 
       h3 {
-        font-size: 18px;
+        font-size: 20px;
         margin-bottom: 10px;
       }
 
@@ -112,10 +118,26 @@
         padding: 0;
 
         .attributeItem {
-          margin-bottom: 5px;
+          display: flex;
+          align-items: center;
+          font-size: 16px;
+          color: #444;
 
           strong {
-            color: #333;
+            color: #222;
+            white-space: nowrap;
+          }
+
+          &::before {
+            content: "";
+            flex: 1;
+            border-bottom: 1px dashed #ccc;
+            margin: 0 10px;
+          }
+
+          span {
+            color: #555;
+            white-space: nowrap;
           }
         }
       }

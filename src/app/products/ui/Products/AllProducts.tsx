@@ -15,6 +15,7 @@ import {
   IProductDetails,
 } from "@/services/getProductDetails";
 import { getProductFieldDetails } from "@/services/getProductFiledDetails";
+import Loading from "@/app/loading";
 
 export const AllProducts: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -61,7 +62,11 @@ export const AllProducts: React.FC = () => {
   }
 
   if (!categories) {
-    return <div>Загрузка категорий...</div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
 
   const handleCategoryChange = (categoryId: string) => {
@@ -119,7 +124,6 @@ export const AllProducts: React.FC = () => {
       <Container>
         <div className={styles.layout}>
           <aside className={styles.sidebar}>
-            <h2>Категории</h2>
             {renderCategories(categories)}
           </aside>
           <main className={styles.products}>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "@/components/Container";
 import styles from "./DetailsCard.module.scss";
 
@@ -21,7 +21,7 @@ interface ProductFieldCategory {
 }
 
 interface DetailsCardProps {
-  id: number;
+
   name: string;
   description: string;
   price: number;
@@ -30,13 +30,16 @@ interface DetailsCardProps {
 }
 
 export const DetailsCard: React.FC<DetailsCardProps> = ({
-  id,
   name,
   description,
   price,
   files,
   productFieldCategories,
 }) => {
+  const [activeImage, setActiveImage] = useState<string>(
+    files.find((file) => file.main)?.filePath || files[0]?.filePath
+  );
+
   const mainImage =
     files.find((file) => file.main)?.filePath || files[0]?.filePath;
 
@@ -46,21 +49,38 @@ export const DetailsCard: React.FC<DetailsCardProps> = ({
         <div className={styles.card}>
           <div className={styles.imageSection}>
             {mainImage && (
-              <img src={mainImage} alt={name} className={styles.mainImage} />
+              <img src={activeImage} alt={name} className={styles.mainImage} />
             )}
             <div className={styles.thumbnailCarousel}>
-              <button className={styles.carouselButton}>❮</button>
+              <button
+                className={styles.carouselButton}
+                onClick={() => setActiveImage(files[0]?.filePath)}
+              >
+                ❮
+              </button>
               <div className={styles.thumbnails}>
                 {files.map((file) => (
                   <img
                     key={file.id}
                     src={file.filePath}
                     alt={`Thumbnail ${file.id}`}
-                    className={file.main ? styles.activeThumbnail : ""}
+                    className={`${file.main ? styles.activeThumbnail : ""} ${
+                      activeImage === file.filePath
+                        ? styles.selectedThumbnail
+                        : ""
+                    }`}
+                    onClick={() => setActiveImage(file.filePath)}
                   />
                 ))}
               </div>
-              <button className={styles.carouselButton}>❯</button>
+              <button
+                className={styles.carouselButton}
+                onClick={() =>
+                  setActiveImage(files[files.length - 1]?.filePath)
+                }
+              >
+                ❯
+              </button>
             </div>
           </div>
           <div className={styles.detailsSection}>
@@ -75,8 +95,8 @@ export const DetailsCard: React.FC<DetailsCardProps> = ({
                   <ul className={styles.attributes}>
                     {category.fields.map((field, index) => (
                       <li key={index} className={styles.attributeItem}>
-                        <strong>{field.field.name} - </strong>
-                        {field.value.value}
+                        <strong>{field.field.name}</strong>
+                        <span>{field.value.value}</span>
                       </li>
                     ))}
                   </ul>

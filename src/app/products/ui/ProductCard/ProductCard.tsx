@@ -1,9 +1,10 @@
+"use clinet";
 import React from "react";
 import styles from "./ProductCard.module.scss";
 import Link from "next/link";
 
 interface ProductCardProps {
-  id: number;
+  id?: number;
   image: string;
   name: string;
   price?: number;
