@@ -2,7 +2,7 @@
 import { ICompany } from "@/services/getCompanyAdress";
 import styles from "../ContactSection.module.scss";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
-import YandexMap from "./YandexMap";
+import { YandexMap } from "./YandexMap";
 
 interface AdressProps {
   company: ICompany;
@@ -26,24 +26,30 @@ export const Adress: React.FC<AdressProps> = ({ company }) => {
       </div>
       {company && (
         <YandexMap
-          latitude={company.address.latitude}
-          longitude={company.address.longitude}
+          mapData={{
+            centerCoords: [
+              Number(company.address.latitude),
+              Number(company.address.longitude),
+            ],
+            pmCoords: [
+              Number(company.address.latitude),
+              Number(company.address.longitude),
+            ],
+          }}
+          // latitude={company.address.latitude}
+          // longitude={company.address.longitude}
         />
       )}
       <div className={styles.socials}>
         <p>Мы в соц. сетях</p>
         <div className={styles.icons}>
-        
-            <FaFacebook />
-          
-            <FaTwitter />
-          
-         
-            <FaInstagram />
-          
-          
-            <FaLinkedin />
-         
+          <FaFacebook />
+
+          <FaTwitter />
+
+          <FaInstagram />
+
+          <FaLinkedin />
         </div>
       </div>
     </div>
