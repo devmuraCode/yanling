@@ -2,7 +2,7 @@
 import { Header } from "@/components/Header/Header"
 import { AllProducts } from "./ui/Products/AllProducts"
 import bgProduct from '../../assets/products.jpg'
-export const Products = () => {
+export default function Products () {
   return (
     <div>
       <Header title="Standard Products" description="Dedicated Computing’s range of off-the-shelf computing systems" image={bgProduct}/>
@@ -10,4 +10,3 @@ export const Products = () => {
     </div>
   )
 }
-export default Products

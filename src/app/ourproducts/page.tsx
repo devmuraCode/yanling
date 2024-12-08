@@ -1,10 +1,10 @@
-import { ProductListSection } from "./sections/ProductListSection/ProductListSection";
+import  ProductListSection  from "./sections/ProductListSection/ProductListSection";
 
-export const OurProducts = () => {
+
+export default function OurProduct() {
   return (
     <div>
       <ProductListSection />
     </div>
   );
 };
-export default OurProducts;

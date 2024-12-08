@@ -13,10 +13,9 @@ import {
 import { getProductFieldDetails } from "@/services/getProductFiledDetails";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Loader } from "lucide-react";
 import Loading from "@/app/Loading";
 
-export const ProductListSection = () => {
+export default function ProductListSection () {
   const [products, setProducts] = useState<CompanyProduct[]>([]);
   const [productDetails, setProductDetails] = useState<IProductDetails | null>(
     null
