@@ -15,14 +15,18 @@ import {
   IProductDetails,
 } from "@/services/getProductDetails";
 import { getProductFieldDetails } from "@/services/getProductFiledDetails";
-import Loading from "@/app/loading";
+import Loading from "@/app/Loading";
 
 export const AllProducts: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [openCategories, setOpenCategories] = useState<Set<number>>(new Set());
   const [products, setProducts] = useState<ProductShortInfo[] | null>(null);
-  const [productDetails, setProductDetails] = useState<IProductDetails | null>(null);
-  const [productFieldDetails, setProductFieldDetails] = useState<any | null>(null);
+  const [productDetails, setProductDetails] = useState<IProductDetails | null>(
+    null
+  );
+  const [productFieldDetails, setProductFieldDetails] = useState<any | null>(
+    null
+  );
   const { data: categories, isError } = useCategories();
   const router = useRouter();
 

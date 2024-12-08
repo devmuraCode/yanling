@@ -21,7 +21,6 @@ interface ProductFieldCategory {
 }
 
 interface DetailsCardProps {
-
   name: string;
   description: string;
   price: number;
@@ -95,7 +94,7 @@ export const DetailsCard: React.FC<DetailsCardProps> = ({
                   <ul className={styles.attributes}>
                     {category.fields.map((field, index) => (
                       <li key={index} className={styles.attributeItem}>
-                        <strong>{field.field.name}</strong>
+                        <p>{field.field.name}</p>
                         <span>{field.value.value}</span>
                       </li>
                     ))}

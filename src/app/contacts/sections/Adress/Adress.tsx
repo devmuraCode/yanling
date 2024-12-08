@@ -33,17 +33,13 @@ export const Adress: React.FC<AdressProps> = ({ company }) => {
       <div className={styles.socials}>
         <p>Мы в соц. сетях</p>
         <div className={styles.icons}>
-        
-            <FaFacebook />
-          
-            <FaTwitter />
-          
-         
-            <FaInstagram />
-          
-          
-            <FaLinkedin />
-         
+          <FaFacebook />
+
+          <FaTwitter />
+
+          <FaInstagram />
+
+          <FaLinkedin />
         </div>
       </div>
     </div>
