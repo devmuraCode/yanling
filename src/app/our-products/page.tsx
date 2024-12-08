@@ -1,6 +1,7 @@
+import { NextPage } from "next"
 import { ProductListSection } from "./sections/ProductListSection/ProductListSection"
 
-export const OurProducts = () => {
+export const OurProducts:NextPage = () => {
   return (
     <div>
       <ProductListSection/>
