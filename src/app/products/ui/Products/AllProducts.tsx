@@ -18,7 +18,7 @@ import { getProductFieldDetails } from "@/services/getProductFiledDetails";
 import Loading from "@/app/Loading";
 
 export const AllProducts: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [openCategories, setOpenCategories] = useState<Set<number>>(new Set());
   const [products, setProducts] = useState<ProductShortInfo[] | null>(null);
   const [productDetails, setProductDetails] = useState<IProductDetails | null>(
@@ -31,13 +31,21 @@ export const AllProducts: React.FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (selectedCategory !== "all") {
+    if (categories && categories.length > 0) {
+      const firstCategoryId = categories[1].id.toString();
+      setSelectedCategory(firstCategoryId);
+    }
+  }, [categories]);
+
+  useEffect(() => {
+    if (selectedCategory) {
       const fetchProducts = async () => {
         try {
           const data = await getShortInfoByCategoryId(Number(selectedCategory));
           setProducts(data);
         } catch (error) {
           console.error("Ошибка загрузки продуктов:", error);
+          setProducts(null);
         }
       };
 
@@ -132,7 +140,7 @@ export const AllProducts: React.FC = () => {
           </aside>
           <main className={styles.products}>
             <div className={styles.productList}>
-              {products ? (
+              {products && products.length > 0 ? (
                 products.map((product) => {
                   const mainImage = product.files.find((file) => file.main);
                   const image = mainImage ? mainImage.filePath : "";
@@ -149,7 +157,7 @@ export const AllProducts: React.FC = () => {
                   );
                 })
               ) : (
-                <p>Выберите категорию для отображения продуктов.</p>
+                <p>Нет продуктов в этой категории.</p>
               )}
             </div>
           </main>

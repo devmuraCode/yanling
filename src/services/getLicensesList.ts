@@ -1,14 +1,19 @@
 import axiosInstance from "@/api/axiosInstance";
 
-export interface ILicenses {
+export interface IFile {
   id: number;
-  fileId: number;
-  title: string;
   filePath: string;
-  description: string;
+  main: boolean;
 }
 
-export async function getLicensesList(): Promise<ILicenses[]> {
+export interface ILicense {
+  id: number;
+  title: string;
+  description: string;
+  files: IFile[];
+}
+
+export async function getLicensesList(): Promise<ILicense[]> {
   const { data } = await axiosInstance.get("/public/v1/license-patent/list");
   return data;
 }

@@ -1,12 +1,20 @@
 @import "../../../variables.scss";
+
 .wrapper {
   padding: 40px 0;
   font-family: "FuturaPT", Arial, sans-serif;
+  background-color: white;
+}
+
+.contentTitle {
+  text-align: center;
+  margin-bottom: 30px;
+
   h2 {
     font-family: impact, sans-serif;
     font-size: $h2-font-size;
     color: $h2-color-dark;
-    text-align: center;
+    margin-bottom: 10px;
 
     @media (max-width: 768px) {
       font-size: 30px;
@@ -22,4 +30,57 @@
     margin: 0 auto;
     border: 2px solid #343434;
   }
+}
+
+.licensesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.licenseCard {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.licenseImage {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.placeholderImage {
+  width: 100%;
+  height: 180px;
+  background-color: #e0e0e0;
+  color: #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.licenseTitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #343434;
+}
+
+.licenseDescription {
+  font-size: 16px;
+  color: #555;
 }
