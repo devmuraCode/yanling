@@ -7,6 +7,8 @@ interface ProductCardProps {
   id?: number;
   image: string;
   name: string;
+  filePath?: string;
+  title?: string;
   price?: number;
   description?: string | null;
   onClick?: () => void;
