@@ -1,13 +1,13 @@
 import "./globals.scss";
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
-import Navbar from "@/components/Navbar/Navbar";
+import { Inter } from "next/font/google";
 import { Footer } from "@/components/Footer/Footer";
 import ReactQueryProvider from "@/lib/react-query-provider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Navbar } from "@/components/Navbar/Navbar";
 
-const font = Nunito({ subsets: ["latin"] });
+const font = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Yanling",

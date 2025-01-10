@@ -1,57 +1,70 @@
 "use client";
-
-import { useState } from "react";
-import Logo from "./Logo";
+import React, { useState } from "react";
 import Container from "../Container";
-import UserMenu from "./UserMenu";
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import Logo from "./Logo";
 import styles from "./Navbar.module.scss";
+import { BiMenuAltRight } from "react-icons/bi";
+import { AiOutlineClose } from "react-icons/ai";
+import Menu from "./Menu";
+import { IoIosArrowDown } from "react-icons/io";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import Link from "next/link";
 
-const Navbar: React.FC = () => {
-  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+export const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen((prev) => !prev);
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
   };
 
   return (
-    <div
-      className={`transition duration-300 bg-white text-black ${styles.navbar}`}
-    >
-      <div className="border-b-[1px]">
-        <div className="py-4">
-          <Container>
-            <div
-              className={`flex items-center justify-between ${styles.navbarContent}`}
-            >
-              <Logo />
+    <div className={styles.wrapper}>
+      <Container>
+        <div className={styles.navbarContent}>
+          <Logo />
+          <div className={styles.contact}>
+            <p>+998 98 776 66 88</p>
+            <div className={styles.dropdown}></div>
 
-              <div className="md:hidden">
-                <button
-                  onClick={toggleMobileMenu}
-                  className={styles.menuToggle}
-                >
-                  {isMobileMenuOpen ? (
-                    <AiOutlineClose className="text-2xl" />
-                  ) : (
-                    <AiOutlineMenu className="text-2xl" />
-                  )}
-                </button>
-              </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <div className="flex items-center cursor-pointer">
+                  <IoIosArrowDown />
+                  <span>O’z</span>
+                </div>
+              </DropdownMenuTrigger>
 
-              <div
-                className={`md:flex ${
-                  isMobileMenuOpen ? styles.menuItemsActive : styles.menuItems
-                }`}
-              >
-                <UserMenu />
-              </div>
+              <DropdownMenuContent className="p-4 md:w-max">
+                <DropdownMenuItem asChild>
+                  <Link href="">O’zbekcha</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="" className={styles.a}>
+                    Русский
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="" className={styles.a}>
+                    English
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <div className={styles.menuToggle} onClick={toggleMenu}>
+              {!isMenuOpen ? <BiMenuAltRight /> : <AiOutlineClose />}
+              <p>Menu</p>
             </div>
-          </Container>
+          </div>
         </div>
-      </div>
+
+        {isMenuOpen && <Menu />}
+      </Container>
     </div>
   );
 };
-
-export default Navbar;

@@ -129,4 +129,18 @@
   }
 }
 
+.slick-arrow::before{
+  color: red !important;
+}
+.slick-prev{
+  top: -46px !important;
+  left: 1170px !important;
+  padding: 10px !important;
+  background: white !important;
+}
+.slick-next{
+  top: -46px !important;
+  right: 20px !important;
+}
+
 

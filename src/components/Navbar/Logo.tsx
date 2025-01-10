@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.svg";
 import { useRouter } from "next/navigation";
 
 const Logo = () => {
@@ -12,8 +12,8 @@ const Logo = () => {
       onClick={() => router.push("/")}
       className="cursor-pointer"
       src={logo}
-      height="100"
-      width="100"
+      height="200"
+      width="200"
       alt="Logo"
     />
   );

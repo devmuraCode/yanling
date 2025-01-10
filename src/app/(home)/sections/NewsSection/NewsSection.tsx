@@ -1,74 +1,62 @@
 import Image from "next/image";
 import Container from "../../../../components/Container";
-import styled from "./NewsSection.module.scss";
-
-import news_1 from "@/assets/news_1.jpg";
-import news_2 from "@/assets/news_2.jpg";
-import news_3 from "@/assets/news_3.jpg";
+import styles from "./NewsSection.module.scss";
+import nws from "@/assets/nws.png";
 
 export const NewsSection = () => {
   return (
-    <div className={styled.wrapper}>
+    <div className={styles.wrapper}>
       <Container>
-        <div>
-          <h2>News</h2>
-          <hr />
-        </div>
+        <h1 className={styles.title}>Yangiliklar</h1>
+        <div className={styles.content}>
+          <div className={styles.cardGroup}>
+            <div className={styles.card}>
+              <Image src={nws} alt="" className={styles.image} />
+              <div className={styles.body}>
+                <span>03.01.2025</span>
 
-        <div className={styled.card_group}>
-          <div className="max-w-sm rounded overflow-hidden shadow-lg ">
-            <div className="overflow-hidden">
-              <Image
-                className="transform transition-transform duration-300 hover:scale-110"
-                src={news_1}
-                alt=""
-              />
-            </div>
-            <div className="px-6 py-4">
-              <div className="font-bold text-lg mb-2">
-                Yanling at Computex 2024
+                <p className={styles.cardDescription}>
+                  Royal, Akfa and Shivaki participate in the international
+                  exhibition Aqua Therm Tashkent 2018
+                </p>
               </div>
-              <p className="text-gray-700 text-sm">
-                On June 4, COMPUTEX 2024 Taipei International Computer Show
-                kicked off...
-              </p>
             </div>
           </div>
+          <div className={styles.otherNews}>
+            <h3>Boshqa yangiliklar</h3>
+            <div className={styles.items}>
+              <div className={styles.item}>
+                <span>03.01.2025</span>
 
-          <div className="max-w-sm rounded overflow-hidden shadow-lg">
-            <div className="overflow-hidden">
-              <Image
-                className="transform transition-transform duration-300 hover:scale-110"
-                src={news_2}
-                alt=""
-              />
-            </div>
-            <div className="px-6 py-4">
-              <div className="font-bold text-lg mb-2">
-                Meeting US In Computex Taipei
+                <p className={styles.cardDescription}>
+                  Royal, Akfa and Shivaki participate in the international
+                  exhibition Aqua Therm Tashkent 2018
+                </p>
               </div>
-              <p className="text-gray-700 text-sm">
-                Join Yanling at Computex Taipei 2024, meet the Yanling team...
-              </p>
-            </div>
-          </div>
+              <div className={styles.item}>
+                <span>03.01.2025</span>
 
-          <div className="max-w-sm rounded overflow-hidden shadow-lg">
-            <div className="overflow-hidden">
-              <Image
-                className="transform transition-transform duration-300 hover:scale-110"
-                src={news_3}
-                alt=""
-              />
-            </div>
-            <div className="px-6 py-4">
-              <div className="font-bold text-lg mb-2">
-                Holiday of International Labor Day
+                <p className={styles.cardDescription}>
+                  Royal, Akfa and Shivaki participate in the international
+                  exhibition Aqua Therm Tashkent 2018
+                </p>
               </div>
-              <p className="text-gray-700 text-sm">
-                Dear Friends, We will be on a short vacation from 1st to 5th
-                May...
-              </p>
+              <div className={styles.item}>
+                <span>03.01.2025</span>
+
+                <p className={styles.cardDescription}>
+                  Royal, Akfa and Shivaki participate in the international
+                  exhibition Aqua Therm Tashkent 2018
+                </p>
+              </div>
+              <div className={styles.item}>
+                <span>03.01.2025</span>
+
+                <p className={styles.cardDescription}>
+                  Royal, Akfa and Shivaki participate in the international
+                  exhibition Aqua Therm Tashkent 2018
+                </p>
+              </div>
             </div>
           </div>
         </div>

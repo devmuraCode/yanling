@@ -1,107 +1,63 @@
-"use client"
-import Aos from "aos";
-import 'aos/dist/aos.css';
+"use client";
+import layer from "@/assets/layer.svg";
 
 import Image from "next/image";
 import Container from "../../../../components/Container";
 import styled from "./AboutSection.module.scss";
+import para from "@/assets/para.svg";
+import hotel from "@/assets/hotel.svg";
 
-
-import bg from "@/assets/yanlingoffice.jpg";
-import { useEffect } from "react";
 export const AboutSection = () => {
-
-  useEffect(() => {
-    Aos.init({
-      duration: 500,
-      easing: 'ease-in-out',
-    })
-  }, []);
-
   return (
     <div className={styled.wrapper}>
       <Container>
-        <div>
-          <h2>About Us</h2>
-          <hr />
-          <p>
-            YANLING Industrial Computer Technology (Shenzhen) Co., Ltd
-            established in 2000, is headquartered in Shenzhen —a special
-            economic zone at the forefront of China's reform and opening up.
-            YANLING is a new type of IT High-Tech enterprise approved and
-            registered by relevant state departments, and it is also a
-            integrated trade and production, resource-based enterprise including
-            R&D, design, production, manufacturing, and sales.
-          </p>
-        </div>
-        <div className={styled.content}>
-          <Image src={bg} alt="" />
-          <div className={styled.content_text}>
-            <ul>
-              <li>
-                <span>
-                  YANLING focuses on the R&D and manufacturing of fanless
-                  industrial pc
-                </span>
-                , industrial touch panel pc, embedded fanless computer, mini pc,
-                network server, motherboard, aluminum chassis and etc, and also
-                provides OEM&ODM services.
-              </li>
-              <li>
-                <span>
-                  Products have been widely used in many fields such as energy
-                </span>
-                , medical, education, telecommunications, multimedia, network
-                security, transportation, finance, electric power, environmental
-                protection, automation equipment, etc.
-              </li>
-              <li>
-                <span>
-                  YANLING has obtained a number of utility model patents and
-                  appearance design patents
-                </span>
-                , and has passed ISO9001, CCC, CE, FCC, ROHS, TUV,
-                certifications and other qualification certifications. YANLING
-                also has many brands such as YANLING, Iwill, minisys, and XSK.
-              </li>
-              <li>
-                <span>
-                  We have established long-term cooperative relations with many
-                  well-known companies with strong strength
-                </span>
-                , reasonable prices, excellent services, and rich experience in
-                R&D and manufacturing. The products are sold all over the world,
-                and the OEM & ODM business has involved Southeast Asia, the
-                Middle East, Europe, America, South Africa and other overseas
-                countries and regions.
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className={styled.card_group}>
-          <div className={styled.card_info} data-aos="fade-left">
-            <div>Total Area◥</div>
-            <div>
-              <h3>6000+ Square Meters</h3>
+        <div className={styled.container}>
+          <div className={styled.content}>
+            <h1>Biz haqimizda</h1>
+            <div className={styled.body}>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+                est sapien, tincidunt vitae semper vel, mattis in magna. Morbi
+                consectetur massa nisl. Cras et lobortis arcu. Nullam feugiat et
+                libero et pharetra. Phasellus sed mollis enim. In vitae luctus
+                lorem. Sed sagittis risus sed tortor molestie scelerisque. Duis
+                malesuada sit amet quam quis semper.
+              </p>
+              <div className={styled.item}>
+                <Image src={layer} width={500} height={500} alt="" />
+                <div>
+                  <h2>O‘rnatish</h2>
+                  <p>
+                    Sizning hududingizga mos ravishda professional o‘rnatish.
+                  </p>
+                </div>
+              </div>
+
+              <div className={styled.item}>
+                <Image src={layer} width={500} height={500} alt="" />
+                <div>
+                  <h2>Texnik xizmat</h2>
+                  <p>
+                    {" "}
+                    Optimal ishlash uchun muntazam tekshiruvlar va texnik xizmat
+                    ko‘rsatish.
+                  </p>
+                </div>
+              </div>
+
+              <div className={styled.item}>
+                <Image src={layer} width={500} height={500} alt="" />
+                <div>
+                  <h2>Moslashtirish</h2>
+                  <p>Sizning o‘ziga xos ehtiyojlaringiz uchun yechimlar.</p>
+                </div>
+              </div>
+              <button className={styled.btn}>Batafsil o’qish</button>
             </div>
           </div>
-          <div className={styled.card_info} data-aos="fade-left">
-            <div>Experience◥</div>
-            <div>
-              <h3>15+ Year</h3>
-            </div>
-          </div>
-          <div className={styled.card_info} data-aos="fade-left">
-            <div>Staff◥</div>
-            <div>
-              <h3>200+Individual</h3>
-            </div>
-          </div>
-          <div className={styled.card_info} data-aos="fade-left">
-            <div>Brand◥</div>
-            <div>
-              <h3>4 Individual</h3>
-            </div>
+          <div className={styled.images}>
+            <Image src={para} alt="" />
+            <Image src={hotel} alt="" />
           </div>
         </div>
       </Container>
