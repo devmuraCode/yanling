@@ -24,8 +24,7 @@ export const LicensesSection = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
+ 
     responsive: [
       {
         breakpoint: 1024,

@@ -6,6 +6,7 @@ import Container from "../../../../components/Container";
 import styled from "./AboutSection.module.scss";
 import para from "@/assets/para.svg";
 import hotel from "@/assets/hotel.svg";
+import Link from "next/link";
 
 export const AboutSection = () => {
   return (
@@ -52,7 +53,7 @@ export const AboutSection = () => {
                   <p>Sizning o‘ziga xos ehtiyojlaringiz uchun yechimlar.</p>
                 </div>
               </div>
-              <button className={styled.btn}>Batafsil o’qish</button>
+              <Link href={"/about"} className={styled.btn}>Batafsil o’qish</Link>
             </div>
           </div>
           <div className={styled.images}>

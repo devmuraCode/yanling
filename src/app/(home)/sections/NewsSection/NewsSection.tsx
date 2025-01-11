@@ -1,62 +1,63 @@
+"use client";
 import Image from "next/image";
 import Container from "../../../../components/Container";
 import styles from "./NewsSection.module.scss";
-import nws from "@/assets/nws.png";
+import { getNewsList, INews } from "@/services/getNewsList";
+import { useEffect, useState } from "react";
 
 export const NewsSection = () => {
+  const [news, setNews] = useState<INews[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const data = await getNewsList();
+        setNews(data);
+      } catch (err) {
+        setError("Ошибка при загрузке новостей.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNews();
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <Container>
         <h1 className={styles.title}>Yangiliklar</h1>
         <div className={styles.content}>
           <div className={styles.cardGroup}>
-            <div className={styles.card}>
-              <Image src={nws} alt="" className={styles.image} />
-              <div className={styles.body}>
-                <span>03.01.2025</span>
-
-                <p className={styles.cardDescription}>
-                  Royal, Akfa and Shivaki participate in the international
-                  exhibition Aqua Therm Tashkent 2018
-                </p>
+            {news.length > 0 && (
+              <div className={styles.card}>
+                {news[0].filePath && (
+                  <Image
+                    src={news[1].filePath}
+                    alt="News Image"
+                    className={styles.image}
+                    width="400"
+                    height="400"
+                  />
+                )}
+                <div className={styles.body}>
+                  <span>{news[0].date}</span>
+                  <p className={styles.cardDescription}>{news[0].title}</p>
+                </div>
               </div>
-            </div>
+            )}
           </div>
           <div className={styles.otherNews}>
             <h3>Boshqa yangiliklar</h3>
             <div className={styles.items}>
-              <div className={styles.item}>
-                <span>03.01.2025</span>
-
-                <p className={styles.cardDescription}>
-                  Royal, Akfa and Shivaki participate in the international
-                  exhibition Aqua Therm Tashkent 2018
-                </p>
-              </div>
-              <div className={styles.item}>
-                <span>03.01.2025</span>
-
-                <p className={styles.cardDescription}>
-                  Royal, Akfa and Shivaki participate in the international
-                  exhibition Aqua Therm Tashkent 2018
-                </p>
-              </div>
-              <div className={styles.item}>
-                <span>03.01.2025</span>
-
-                <p className={styles.cardDescription}>
-                  Royal, Akfa and Shivaki participate in the international
-                  exhibition Aqua Therm Tashkent 2018
-                </p>
-              </div>
-              <div className={styles.item}>
-                <span>03.01.2025</span>
-
-                <p className={styles.cardDescription}>
-                  Royal, Akfa and Shivaki participate in the international
-                  exhibition Aqua Therm Tashkent 2018
-                </p>
-              </div>
+              {news.slice(1, 6).map((item) => (
+                <div key={item.id} className={styles.item}>
+                  <span></span>
+                  <p className={styles.cardDescription}>{item.title}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

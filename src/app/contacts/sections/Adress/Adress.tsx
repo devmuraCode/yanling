@@ -3,45 +3,73 @@ import { ICompany } from "@/services/getCompanyAdress";
 import styles from "../ContactSection.module.scss";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import YandexMap from "./YandexMap";
+import { useEffect } from "react";
 
 interface AdressProps {
   company: ICompany;
 }
-
 export const Adress: React.FC<AdressProps> = ({ company }) => {
+  const { name, address, phones, emails, socialAddresses } = company;
+
+  if (!address || typeof address !== "object") {
+    return <p>Адрес компании не указан.</p>;
+  }
+
+  const { street, house, apartment, latitude, longitude } = address;
+
   return (
-    <div>
-      <h2>МЫ НА СВЯЗИ</h2>
+    <div className={styles.container}>
       <div className={styles.contactDetails}>
-        {company.phones?.map((phone, index) => (
-          <p key={index}>{phone}</p>
+        <h3>Телефоны:</h3>
+        {phones?.map((phone) => (
+          <p key={phone.id}>
+            {phone.name} ({phone.type.name})
+          </p>
         ))}
-        {company.emails?.map((email, index) => (
-          <p key={index}>{email}</p>
+
+        <h3>Электронная почта:</h3>
+        {emails?.map((email) => (
+          <p key={email.id}>
+            {email.name} ({email.type.name})
+          </p>
         ))}
-        <p>
-          {company.name}, {company.address.street}, д. {company.address.house}
-          {company.address.apartment && `, кв. ${company.address.apartment}`}
-        </p>
+
+        {street && house && (
+          <p>
+            {name}, {street}, д. {house}
+            {apartment && `, кв. ${apartment}`}
+          </p>
+        )}
       </div>
-      {company && (
-        <YandexMap
-          latitude={company.address.latitude}
-          longitude={company.address.longitude}
-        />
+
+      {latitude && longitude && (
+        <div className={styles.mapContainer}>
+          <YandexMap latitude={latitude} longitude={longitude} />
+        </div>
       )}
+
       <div className={styles.socials}>
-        <p>Мы в соц. сетях</p>
+        <h3>Мы в соц. сетях:</h3>
         <div className={styles.icons}>
-          <FaFacebook />
-
-          <FaTwitter />
-
-          <FaInstagram />
-
-          <FaLinkedin />
+          {socialAddresses?.map((social) => (
+            <a
+              key={social.id}
+              href={social.name}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {social.type.name === "Facebook" && <FaFacebook />}
+              {social.type.name === "Twitter" && <FaTwitter />}
+              {social.type.name === "Instagram" && <FaInstagram />}
+              {social.type.name === "LinkedIn" && <FaLinkedin />}
+              {!["Facebook", "Twitter", "Instagram", "LinkedIn"].includes(
+                social.type.name
+              ) && <span>{social.type.name}</span>}
+            </a>
+          ))}
         </div>
       </div>
     </div>
   );
 };
+

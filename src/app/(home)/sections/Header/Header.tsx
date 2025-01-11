@@ -3,6 +3,7 @@ import styles from "./Header.module.scss";
 import Container from "@/components/Container";
 import headerposition from "@/assets/headerpositioncenter.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 export const Header = () => {
   return (
@@ -14,12 +15,8 @@ export const Header = () => {
             Radar tizimlari va professional o‘rnatish xizmatlari
           </p>
           <div className={styles.buttons}>
-            <button className={styles.btn}>
-              Bizning mahsulotlar
-            </button>
-            <button className={styles.btn}>
-              Biz haqimizda
-            </button>
+            <Link href={"/products"} className={styles.btn}>Bizning mahsulotlar</Link>
+            <Link href={"/about"} className={styles.btn}>Biz haqimizda</Link>
           </div>
         </div>
         <div className={styles.imageContainer}>

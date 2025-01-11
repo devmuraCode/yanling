@@ -2,33 +2,49 @@
 import Container from "@/components/Container";
 import styles from "./ProductsNew.module.scss";
 import { useEffect, useState } from "react";
-import { ProductShortInfo } from "@/services/getFieldDetailsByCategoryId";
-import { getCopanyProductsList } from "@/services/getCopanyProductsList";
+import { getShortInfoList } from "@/services/getShortInfoList";
+import {
+  CompanyProduct,
+  getCopanyProductsList,
+} from "@/services/getCopanyProductsList";
 import { useRouter } from "next/navigation";
 import ProductCard from "../ProductCard/ProductCard";
 
 export const ProductsNew = () => {
-  const [companyProducts, setCompanyProducts] = useState<
-    ProductShortInfo[] | null
-  >(null);
+  const [products, setProducts] = useState<CompanyProduct[] | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>("firma"); // Хранит активную категорию
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchCompanyProducts = async () => {
-      try {
-        const data = await getCopanyProductsList();
-        // @ts-ignore
-        setCompanyProducts(data);
-      } catch (error) {
-        console.error("Ошибка загрузки продуктов компании:", error);
-      }
-    };
+  const fetchCompanyProducts = async () => {
+    try {
+      const data = await getCopanyProductsList();
+      setProducts(data);
+      setActiveCategory("firma");
+    } catch (error) {
+      console.error("Ошибка загрузки продуктов компании:", error);
+    }
+  };
 
-    fetchCompanyProducts();
+  const fetchShortInfoProducts = async () => {
+    try {
+      const data = await getShortInfoList();
+      setProducts(data);
+      setActiveCategory("xitoy");
+    } catch (error) {
+      console.error("Ошибка загрузки короткой информации о продуктах:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCompanyProducts(); // По умолчанию загружаем "Firma mahsulotlari"
   }, []);
 
-  const handleProductClick = (productId: number) => {
-    router.push(`/productDetails/${productId}`);
+  const handleProductClick = async (productId: number) => {
+    try {
+      router.push(`/productDetails/${productId}`);
+    } catch (error) {
+      console.error("Ошибка получения деталей продукта:", error);
+    }
   };
 
   return (
@@ -37,19 +53,32 @@ export const ProductsNew = () => {
         <h1 className={styles.title}>Mahsulotlarimiz</h1>
         <div className={styles.products}>
           <div className={styles.category_button}>
-            <button className={styles.btn}>Firma mahsulotlari</button>
-            <button className={styles.btn}>Xitoy mahsulotlari</button>
+            <button
+              className={`${styles.btn} ${
+                activeCategory === "firma" ? styles.active : ""
+              }`}
+              onClick={fetchCompanyProducts}
+            >
+              Firma mahsulotlari
+            </button>
+            <button
+              className={`${styles.btn} ${
+                activeCategory === "xitoy" ? styles.active : ""
+              }`}
+              onClick={fetchShortInfoProducts}
+            >
+              Xitoy mahsulotlari
+            </button>
           </div>
           <div className={styles.productsSection}>
-            {companyProducts && companyProducts.length > 0 ? (
-              companyProducts.map((product) => (
+            {products && products.length > 0 ? (
+              products.map((product) => (
                 <ProductCard
                   key={product.id}
                   id={product.id}
-                  // @ts-ignore
                   image={product.filePath}
-                  // @ts-ignore
                   name={product.title}
+                  // @ts-ignore
                   price={product.price || 0}
                   onClick={() => handleProductClick(product.id)}
                 />

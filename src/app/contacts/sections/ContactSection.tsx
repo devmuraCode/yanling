@@ -5,8 +5,7 @@ import Container from "@/components/Container";
 import styles from "./ContactSection.module.scss";
 import { Textarea } from "@/components/ui/textarea";
 import useContactForm from "@/hooks/useCreateContact";
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
-import { getCompanyAdress } from "@/services/getCompanyAdress";
+import { getCompanyAdress, ICompany } from "@/services/getCompanyAdress";
 import { Adress } from "./Adress/Adress";
 
 const ContactSection = () => {
@@ -15,12 +14,14 @@ const ContactSection = () => {
   const [phone, setPhone] = useState("+998");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [company, setCompany] = useState<any>(null);
+  const [company, setCompany] = useState<ICompany | null>(null);
+  console.log(company);
 
   useEffect(() => {
     const fetchCompanyAdress = async () => {
       try {
         const data = await getCompanyAdress();
+        // @ts-ignore
         setCompany(data);
       } catch (error) {
         console.error("Ошибка при получении адреса компании", error);
@@ -62,7 +63,6 @@ const ContactSection = () => {
       <Container>
         <div className={styles.contactSection}>
           <div className={styles.formSection}>
-            <h2>ЗАКАЖИТЕ ДЕМОНСТРАЦИЮ</h2>
             <p>Заполните форму и наш менеджер свяжется с вами...</p>
             <form className={styles.form} onSubmit={handleSubmit}>
               <Input
@@ -104,7 +104,7 @@ const ContactSection = () => {
           </div>
 
           <div className={styles.infoSection}>
-            {company && <Adress company={company} />}
+            {company ? <Adress company={company} /> : <p>Загрузка данных...</p>}
           </div>
         </div>
       </Container>

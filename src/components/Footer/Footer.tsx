@@ -25,11 +25,11 @@ export const Footer = () => {
 
        
           <div className={styles.menuItems}>
-            <Link href="#">Kompaniya haqida</Link>
-            <Link href="#">Bizning mahsulotlar</Link>
-            <Link href="#">Xizmatlar</Link>
-            <Link href="#">Yangiliklar</Link>
-            <Link href="#">Kontaktlar</Link>
+            <Link href="/about">Kompaniya haqida</Link>
+            <Link href="/products">Bizning mahsulotlar</Link>
+            <Link href="/services">Xizmatlar</Link>
+            <Link href="/news">Yangiliklar</Link>
+            <Link href="/contacts">Kontaktlar</Link>
           </div>
 
      

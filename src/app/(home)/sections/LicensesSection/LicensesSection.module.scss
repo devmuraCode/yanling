@@ -27,32 +27,6 @@
     }
   }
 
-  .slick-arrow::before {
-    color: red;
-  }
-
-  .slick-prev {
-    color: red !important;
-  }
-
-  .nextArrow,
-  .prevArrow {
-    position: absolute;
-    top: 50%;
-    z-index: 10;
-    cursor: pointer;
-  }
-
-  .nextArrow {
-    right: -20px;
-    transform: translateY(-50%);
-  }
-
-  .prevArrow {
-    left: -20px;
-    transform: translateY(-50%);
-  }
-
   @media (max-width: 1024px) {
     .card {
       padding: 8px;

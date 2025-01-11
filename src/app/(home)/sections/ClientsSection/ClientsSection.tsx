@@ -1,29 +1,87 @@
+"use client"
+import { useEffect, useState } from "react";
 import styles from "./ClientsSection.module.scss";
-
-import opanAi from "@/assets/openAi.svg";
-import yandex from "@/assets/yandex.svg";
-import sumsung from "@/assets/samsung.svg";
-import microsoft from "@/assets/microsoft.svg";
-import panasonic from "@/assets/panasonic.svg";
-import hikvision from "@/assets/hikvision.svg";
 import Container from "@/components/Container";
 import Image from "next/image";
+import { getCompanyPartners } from "@/services/getCompanyPartners";
+
+interface Client {
+  id: number;
+  name: string;
+  webSite: string;
+  filePath: string | null;
+}
 
 export const ClientsSection = () => {
+  const [clients, setClients] = useState<Client[]>([]);
+  const [activeTab, setActiveTab] = useState<"Mijozlarimiz" | "Hamkorlarimiz">(
+    "Mijozlarimiz"
+  );
+
+  useEffect(() => {
+    const fetchClients = async () => {
+      try {
+        const data = await getCompanyPartners();
+        setClients(
+          data.map(({ id, name, webSite, filePath }: any) => ({
+            id,
+            name,
+            webSite,
+            filePath,
+          }))
+        );
+      } catch (error) {
+        console.error("Ошибка загрузки данных о клиентах:", error);
+      }
+    };
+
+    fetchClients();
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <Container>
+        {/* Заголовки вкладок */}
         <div className={styles.header}>
-          <h3 className={styles.activeTab}>Mijozlarimiz</h3>
-          <h3>Hamkorlarimiz</h3>
+          <h3
+            className={`${styles.tab} ${
+              activeTab === "Mijozlarimiz" ? styles.activeTab : ""
+            }`}
+            onClick={() => setActiveTab("Mijozlarimiz")}
+          >
+            Mijozlarimiz
+          </h3>
+          <h3
+            className={`${styles.tab} ${
+              activeTab === "Hamkorlarimiz" ? styles.activeTab : ""
+            }`}
+            onClick={() => setActiveTab("Hamkorlarimiz")}
+          >
+            Hamkorlarimiz
+          </h3>
         </div>
+
+        {/* Список логотипов */}
         <div className={styles.logos}>
-          <Image src={opanAi} alt="OpenAI" />
-          <Image src={yandex} alt="Yandex" />
-          <Image src={sumsung} alt="Samsung" />
-          <Image src={microsoft} alt="Microsoft" />
-          <Image src={panasonic} alt="Panasonic" />
-          <Image src={hikvision} alt="Hikvision" />
+          {clients.length > 0 ? (
+            clients.map((client) => (
+              <a
+                key={client.id}
+                href={client.webSite}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src={client.filePath || "/assets/placeholder.svg"}
+                  alt={client.name}
+                  width={100}
+                  height={100}
+                />
+              </a>
+            ))
+          ) : (
+            <p>Загрузка клиентов...</p>
+          )}
         </div>
       </Container>
     </div>

@@ -37,7 +37,8 @@ export const ContactSection = () => {
 
             <div className={styles.forms}>
               <Input placeholder="Ism sharifingiz" />
-              <Textarea/>
+              <Textarea />
+              <button className={styles.btn}>Barchasini o’qish</button>
             </div>
           </div>
         </div>

@@ -17,9 +17,15 @@ import Link from "next/link";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState(null);
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
+  };
+
+  const handleLanguageSelect = (language: any) => {
+    setSelectedLanguage(language);
+    setIsMenuOpen(false);
   };
 
   return (
@@ -35,21 +41,26 @@ export const Navbar = () => {
               <DropdownMenuTrigger asChild>
                 <div className="flex items-center cursor-pointer">
                   <IoIosArrowDown />
-                  <span>O’z</span>
+                  <span>{selectedLanguage || "O’z"}</span>
                 </div>
               </DropdownMenuTrigger>
 
               <DropdownMenuContent className="p-4 md:w-max">
                 <DropdownMenuItem asChild>
-                  <Link href="">O’zbekcha</Link>
+                  <Link
+                    href=""
+                    onClick={() => handleLanguageSelect("O’zbekcha")}
+                  >
+                    O’zbekcha
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="" className={styles.a}>
+                  <Link href="" onClick={() => handleLanguageSelect("Русский")}>
                     Русский
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="" className={styles.a}>
+                  <Link href="" onClick={() => handleLanguageSelect("English")}>
                     English
                   </Link>
                 </DropdownMenuItem>

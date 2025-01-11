@@ -32,6 +32,14 @@
   .btn {
     padding: 10px 0;
     font-size: 16px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #333;
+
+    &:hover {
+      color: #0070f3;
+    }
 
     @media (max-width: 768px) {
       font-size: 14px;
@@ -42,6 +50,11 @@
       font-size: 12px;
       padding: 6px 0;
     }
+  }
+
+  .active {
+    border-bottom: 2px solid #000000; 
+    font-weight: bold;
   }
 
   .productsSection {

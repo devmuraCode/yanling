@@ -1,6 +1,8 @@
 import axiosInstance from "@/api/axiosInstance";
+import { ReactNode } from "react";
 
 export interface INews {
+    date: ReactNode;
     id: number;
     fileId: number;
     title: string;

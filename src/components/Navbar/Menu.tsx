@@ -19,9 +19,6 @@ const Menu = () => {
               <Link href="/products">Bizning mahsulotlar</Link>
             </li>
             <li>
-              <Link href="/services">Xizmatlar</Link>
-            </li>
-            <li>
               <Link href="/news">Yangiliklar</Link>
             </li>
             <li>
