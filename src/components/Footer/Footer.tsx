@@ -1,3 +1,5 @@
+"use client";
+import { useEffect, useState } from "react";
 import Logo from "../Navbar/Logo";
 import Container from "../Container";
 import styles from "./Footer.module.scss";
@@ -6,14 +8,35 @@ import Image from "next/image";
 import tel from "@/assets/telegramfooter.svg";
 import main from "@/assets/mailfooter.svg";
 import location from "@/assets/locationfooter.svg";
-import telegram from '@/assets/telegramfooter.svg'
+import telegram from "@/assets/telegramfooter.svg";
+import { getCompanyAdress, ICompany } from "@/services/getCompanyAdress";
 
 export const Footer = () => {
+  const [adress, setAdress] = useState<ICompany | null>(null);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("+998");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [company, setCompany] = useState<ICompany | null>(null);
+
+  useEffect(() => {
+    const fetchCompanyAdress = async () => {
+      try {
+        const data = await getCompanyAdress();
+        // @ts-ignore
+        setAdress(data);
+      } catch (error) {
+        console.error("Ошибка при получении адреса компании", error);
+      }
+    };
+
+    fetchCompanyAdress();
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <Container>
         <div className={styles.content}>
-      
           <div className={styles.logo}>
             <Logo />
             <p>
@@ -23,7 +46,6 @@ export const Footer = () => {
             </p>
           </div>
 
-       
           <div className={styles.menuItems}>
             <Link href="/about">Kompaniya haqida</Link>
             <Link href="/products">Bizning mahsulotlar</Link>
@@ -32,11 +54,12 @@ export const Footer = () => {
             <Link href="/contacts">Kontaktlar</Link>
           </div>
 
-     
           <div className={styles.contacts}>
             <div className={styles.contactInfo}>
               <Image src={tel} alt="" />
-              <p>998 71 765 21 43 / 998 90 233 12 44</p>
+              <p>
+                 / 
+              </p>
             </div>
             <div className={styles.contactInfo}>
               <Image src={main} alt="" />
@@ -52,7 +75,6 @@ export const Footer = () => {
             </div>
           </div>
 
-         
           <div className={styles.map}>
             <iframe
               src="https://www.google.com/maps/embed?..."
@@ -65,7 +87,6 @@ export const Footer = () => {
           </div>
         </div>
 
-       
         <div className={styles.footerBottom}>
           <p>© 2025 UzRoss-Techno. Barcha huquqlar kafolatlangan</p>
         </div>

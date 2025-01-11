@@ -41,7 +41,7 @@ export const ClientsSection = () => {
   return (
     <div className={styles.wrapper}>
       <Container>
-        {/* Заголовки вкладок */}
+  
         <div className={styles.header}>
           <h3
             className={`${styles.tab} ${
@@ -61,7 +61,7 @@ export const ClientsSection = () => {
           </h3>
         </div>
 
-        {/* Список логотипов */}
+
         <div className={styles.logos}>
           {clients.length > 0 ? (
             clients.map((client) => (

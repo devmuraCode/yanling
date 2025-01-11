@@ -4,19 +4,24 @@ import Container from "@/components/Container";
 import styles from "./LicensesSection.module.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import license1 from "@/assets/license1.png";
-import license2 from "@/assets/license2.png";
-import license3 from "@/assets/license3.png";
-import license4 from "@/assets/license4.png";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { getLicensesList, ILicense } from "@/services/getLicensesList";
 
 export const LicensesSection = () => {
-  const licenses = [
-    { img: license1, title: "E24 43023 AEM Sertifikati" },
-    { img: license2, title: "EAC Sertifikati" },
-    { img: license3, title: "L24 43022 AEM Sertifikati" },
-    { img: license4, title: "Sertifikat ISO 9001:2005" },
-  ];
+  const [licenses, setLicenses] = useState<ILicense[]>([]);
+
+  useEffect(() => {
+    const fetchLicenses = async () => {
+      try {
+        const data = await getLicensesList();
+        setLicenses(data || []);
+      } catch (error) {
+        console.error("Error fetching licenses:", error);
+      }
+    };
+    fetchLicenses();
+  }, []);
 
   const settings = {
     dots: false,
@@ -24,7 +29,8 @@ export const LicensesSection = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
- 
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
     responsive: [
       {
         breakpoint: 1024,
@@ -51,18 +57,23 @@ export const LicensesSection = () => {
     <div className={styles.wrapper}>
       <Container>
         <h2 className={styles.title}>Sertifikatlar va patentlar</h2>
-        <div className="slider-container">
+        <div className={styles.sliderContainer}>
           <Slider {...settings}>
-            {licenses.map((license, index) => (
-              <div key={index} className={styles.card}>
-                <Image
-                  src={license.img}
-                  alt={license.title}
-                  className={styles.image}
-                />
-                <p className={styles.license_title}>{license.title}</p>
-              </div>
-            ))}
+            {licenses.map((license) =>
+              license.files.map((file) => (
+                <div key={file.id} className={styles.card}>
+                  <Image
+                    src={file.filePath}
+                    alt={license.title || "License Image"}
+                    className={styles.image}
+                    width={300}
+                    height={300}
+                    loading="lazy"
+                  />
+                  <p className={styles.licenseTitle}>{license.title}</p>
+                </div>
+              ))
+            )}
           </Slider>
         </div>
       </Container>
@@ -75,7 +86,7 @@ const SampleNextArrow = (props: any) => {
   return (
     <div
       className={`${className} ${styles.nextArrow}`}
-      style={style}
+      style={{ ...style, display: "block" }}
       onClick={onClick}
     />
   );
@@ -86,7 +97,7 @@ const SamplePrevArrow = (props: any) => {
   return (
     <div
       className={`${className} ${styles.prevArrow}`}
-      style={style}
+      style={{ ...style, display: "block" }}
       onClick={onClick}
     />
   );
