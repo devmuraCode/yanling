@@ -5,12 +5,13 @@ import { INews, getNewsList } from "@/services/getNewsList";
 import Container from "@/components/Container";
 import styles from "./NewsSection.module.scss";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export const NewsSection = () => {
   const [news, setNews] = useState<INews[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
- const router = useRouter();
+  const router = useRouter();
   useEffect(() => {
     const fetchNews = async () => {
       try {
@@ -32,37 +33,43 @@ export const NewsSection = () => {
     }
     return text;
   };
-
+  const formatDate = (date: string): string => {
+    const dateObj = new Date(date);
+    const year = dateObj.getFullYear();
+    const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+    const day = String(dateObj.getDate()).padStart(2, "0");
+    return `${year}.${month}.${day}`;
+  };
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-
-
 
   if (loading) return <div>Загрузка...</div>;
   if (error) return <div>{error}</div>;
-   const handleProductClick = async (productId: number) => {
-
-       router.push(`/newsDetail/${productId}`);
-    
-   };
+  const handleProductClick = async (productId: number) => {
+    router.push(`/newsDetail/${productId}`);
+  };
   return (
     <div className={styles.wrapper}>
       <Container>
+        <div className={styles.pages}>
+          <Link href={"/"}> Bosh sahifa</Link> /{" "}
+          <Link href={"/news"}>Yangiliklar</Link>
+        </div>
         <div className={styles.newsGroup}>
           {news.map((item, index) => (
             <div className={styles.article} key={item.id}>
               <img src={item.filePath} alt={item.title} />
               <div className={styles.articleContent}>
-                <h2>{item.title}</h2>
                 <p>
                   {expandedIndex === index
                     ? item.description
                     : truncateText(item.description, 150)}
                 </p>
+                <span>{formatDate(item.createdDate)}</span>
                 <button
-                  className={styles.readMoreBtn}
+                  className={styles.btn}
                   onClick={() => handleProductClick(item.id)}
                 >
-                  Читать далее
+                  Batafsil o’qish
                 </button>
               </div>
             </div>

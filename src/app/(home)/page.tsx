@@ -5,6 +5,7 @@ import { ContactSection } from "./sections/ContactSection/ContactSection";
 import { Header } from "./sections/Header/Header";
 import { LicensesSection } from "./sections/LicensesSection/LicensesSection";
 import { NewsSection } from "./sections/NewsSection/NewsSection";
+import { ProductsSection } from "./sections/ProductsSection/ProductsSection";
 import { ServiceSection } from "./sections/ServiceSection/ServiceSection";
 
 
@@ -15,6 +16,7 @@ export default function Home() {
       <AboutSection />
       <ClientsSection/>
       <LicensesSection/>
+      <ProductsSection/>
       <ServiceSection/>
       <NewsSection/>
       <ContactSection/>

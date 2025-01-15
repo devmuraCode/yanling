@@ -35,16 +35,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <h3 className={styles.name}>{name}</h3>
         <p>{description}</p>
         <p className={styles.price}>{price ? `${price} ₽` : "Нет в наличии"}</p>
-        <Link
-          href={`/productDetails/${id}`}
-          className={styles.button}
-          onClick={(e) => {
-            e.stopPropagation();
-            onClick && onClick();
-          }}
-        >
-          Read More
-        </Link>
       </div>
     </div>
   );

@@ -1,9 +1,10 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import styles from "./ClientsSection.module.scss";
 import Container from "@/components/Container";
 import Image from "next/image";
 import { getCompanyPartners } from "@/services/getCompanyPartners";
+import { getCompanyCustomers } from "@/services/getCompanyCustomers";
 
 interface Client {
   id: number;
@@ -18,30 +19,33 @@ export const ClientsSection = () => {
     "Mijozlarimiz"
   );
 
-  useEffect(() => {
-    const fetchClients = async () => {
-      try {
-        const data = await getCompanyPartners();
-        setClients(
-          data.map(({ id, name, webSite, filePath }: any) => ({
-            id,
-            name,
-            webSite,
-            filePath,
-          }))
-        );
-      } catch (error) {
-        console.error("Ошибка загрузки данных о клиентах:", error);
-      }
-    };
+  const fetchClients = async (tab: "Mijozlarimiz" | "Hamkorlarimiz") => {
+    try {
+      const data =
+        tab === "Mijozlarimiz"
+          ? await getCompanyCustomers()
+          : await getCompanyPartners();
 
-    fetchClients();
-  }, []);
+      setClients(
+        data.map(({ id, name, webSite, filePath }: any) => ({
+          id,
+          name,
+          webSite,
+          filePath,
+        }))
+      );
+    } catch (error) {
+      console.error("Ошибка загрузки данных о клиентах:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchClients(activeTab);
+  }, [activeTab]);
 
   return (
     <div className={styles.wrapper}>
       <Container>
-  
         <div className={styles.header}>
           <h3
             className={`${styles.tab} ${
@@ -60,7 +64,6 @@ export const ClientsSection = () => {
             Hamkorlarimiz
           </h3>
         </div>
-
 
         <div className={styles.logos}>
           {clients.length > 0 ? (

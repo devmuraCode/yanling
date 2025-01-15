@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import Logo from "../Navbar/Logo";
 import Container from "../Container";
@@ -9,29 +10,60 @@ import tel from "@/assets/telegramfooter.svg";
 import main from "@/assets/mailfooter.svg";
 import location from "@/assets/locationfooter.svg";
 import telegram from "@/assets/telegramfooter.svg";
-import { getCompanyAdress, ICompany } from "@/services/getCompanyAdress";
+import { getCompanyInfo, CompanyInfo } from "@/services/getCompanyInfo";
 
 export const Footer = () => {
-  const [adress, setAdress] = useState<ICompany | null>(null);
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("+998");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [company, setCompany] = useState<ICompany | null>(null);
+  const [companyInfo, setCompanyInfo] = useState<CompanyInfo | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchCompanyAdress = async () => {
+    const fetchCompanyInfo = async () => {
       try {
-        const data = await getCompanyAdress();
-        // @ts-ignore
-        setAdress(data);
-      } catch (error) {
-        console.error("Ошибка при получении адреса компании", error);
+        const data = await getCompanyInfo();
+        setCompanyInfo(data);
+      } catch (err) {
+        setError("Ошибка при загрузке информации о компании.");
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchCompanyAdress();
+    fetchCompanyInfo();
   }, []);
+
+  if (loading) {
+    return <div className={styles.loading}>Загрузка...</div>;
+  }
+
+  if (error) {
+    return <div className={styles.error}>{error}</div>;
+  }
+
+  if (!companyInfo) {
+    return <div className={styles.error}>Нет данных для отображения.</div>;
+  }
+
+  const {
+    description,
+    address,
+    phones = [],
+    emails = [],
+    socialAddresses = [],
+  } = companyInfo;
+
+  const primaryPhone = phones.find((phone) => phone.primary)?.name || "+998";
+  const additionalPhone =
+    phones.find((phone) => !phone.primary)?.name || "Доп. номер";
+  const primaryEmail =
+    emails.find((email) => email.primary)?.name || "info@uzross-techno.uz";
+  const telegramLink =
+    socialAddresses.find((social) => social.type.name === "Telegram")?.name ||
+    "uzross-info";
+
+  const mapLink = address
+    ? `https://www.google.com/maps?q=${address.latitude},${address.longitude}`
+    : "https://www.google.com/maps/embed?...";
 
   return (
     <div className={styles.wrapper}>
@@ -40,9 +72,12 @@ export const Footer = () => {
           <div className={styles.logo}>
             <Logo />
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-              est sapien, tincidunt vitae semper vel, mattis in magna. Morbi
-              consectetur massa nisl.
+              {description.length > 100
+                ? `${description.slice(0, 100)}...`
+                : description}{" "}
+              <Link href="/about" className={styles.readMoreButton}>
+                Читать дальше
+              </Link>
             </p>
           </div>
 
@@ -56,34 +91,47 @@ export const Footer = () => {
 
           <div className={styles.contacts}>
             <div className={styles.contactInfo}>
-              <Image src={tel} alt="" />
+              <Image src={tel} alt="Телефон" />
               <p>
-                 / 
+                {primaryPhone} / {additionalPhone}
               </p>
             </div>
             <div className={styles.contactInfo}>
-              <Image src={main} alt="" />
-              <a href="mailto:info@uzross-techno.uz">info@uzross-techno.uz</a>
+              <Image src={main} alt="Email" />
+              <a href={`mailto:${primaryEmail}`}>{primaryEmail}</a>
             </div>
             <div className={styles.contactInfo}>
-              <Image src={telegram} alt="" />
-              <a href="https://t.me/uzross_info">@uzross-info</a>
+              <Image src={telegram} alt="Telegram" />
+              <a
+                href={`https://t.me/${telegramLink}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                @{telegramLink}
+              </a>
             </div>
             <div className={styles.contactInfo}>
-              <Image src={location} alt="" />
-              <p>Toshkent shahar, Qoraqamish 3/4, Turkiston ko’chasi, 45-uy</p>
+              <Image src={location} alt="Адрес" />
+              <p>
+                {address
+                  ? `${address.street}, ${address.house}, ${address.landmark}`
+                  : "Toshkent shahar, Qoraqamish 3/4, Turkiston ko’chasi, 45-uy"}
+              </p>
             </div>
           </div>
 
           <div className={styles.map}>
-            <iframe
-              src="https://www.google.com/maps/embed?..."
-              width="100%"
-              height="200"
-              style={{ border: 0 }}
-              allowFullScreen={true}
-              loading="lazy"
-            ></iframe>
+            {address ? (
+              <iframe
+                src={`https://yandex.ru/map-widget/v1/?ll=${address.longitude}%2C${address.latitude}&z=15&pt=${address.longitude},${address.latitude},pm2rdm`}
+                width="100%"
+                height="200"
+                style={{ border: "0" }}
+                loading="lazy"
+              ></iframe>
+            ) : (
+              <p>Карта недоступна.</p>
+            )}
           </div>
         </div>
 

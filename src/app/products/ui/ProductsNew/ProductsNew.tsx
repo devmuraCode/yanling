@@ -12,7 +12,7 @@ import ProductCard from "../ProductCard/ProductCard";
 
 export const ProductsNew = () => {
   const [products, setProducts] = useState<CompanyProduct[] | null>(null);
-  const [activeCategory, setActiveCategory] = useState<string>("firma"); // Хранит активную категорию
+  const [activeCategory, setActiveCategory] = useState<string>("firma"); 
   const router = useRouter();
 
   const fetchCompanyProducts = async () => {
@@ -36,7 +36,7 @@ export const ProductsNew = () => {
   };
 
   useEffect(() => {
-    fetchCompanyProducts(); // По умолчанию загружаем "Firma mahsulotlari"
+    fetchCompanyProducts();
   }, []);
 
   const handleProductClick = async (productId: number) => {

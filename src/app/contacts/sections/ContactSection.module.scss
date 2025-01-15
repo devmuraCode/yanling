@@ -1,11 +1,11 @@
 .wrapper {
-  padding: 8rem 0;
-  background-color: #f6f8fa;
+  padding: 4rem 0;
 
   @media (max-width: 768px) {
-    padding: 4rem 0;
+    padding: 1rem 0;
   }
 }
+
 .submitButton {
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
@@ -20,6 +20,7 @@
     color: white;
   }
 }
+
 .contactSection {
   display: flex;
   flex-wrap: wrap;
@@ -38,11 +39,13 @@
   background-color: #fff;
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
   h2 {
     font-size: 1.8rem;
-    margin-bottom: 1rem;
+    margin: 4rem 0;
+    @media (max-width: 768px) {
+      margin: 2rem 0;
+    }
   }
 
   p {
@@ -55,45 +58,44 @@
   }
 }
 
-.form {
+.card {
+  border-radius: 5px;
+  background: #f4f6f7;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-
-  input,
-  textarea {
-    width: 100%;
-    padding: 0.8rem 1rem;
-    border-radius: 8px;
-    font-size: 1rem;
-    background-color: #fff;
-
-    &:focus {
-      outline: none;
-    }
+  gap: 1rem;
+  padding: 1.5rem;
+  width: 100%;
+  @media (max-width: 768px) {
+    text-align: start;
+  }
+  .iconContainer {
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
   }
 
-  textarea {
-    resize: vertical;
-    min-height: 120px;
+  .socialIcons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: underline;
+  }
+}
+
+.infoCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+
+  .card:nth-child(5) {
+    grid-column: span 2;
   }
 
-  .submitButton {
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    width: max-content;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: #caebf6;
-
-    &:hover {
-      background-color: #24aadb;
-      color: white;
-    }
-    &:disabled {
-      background-color: lighten(black, 20%);
-      cursor: not-allowed;
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    .card:nth-child(5) {
+      grid-column: span 1;
     }
   }
 }
@@ -103,6 +105,10 @@
     margin: 1.5rem 0;
     border-radius: 8px;
     overflow: hidden;
+
+    @media (max-width: 768px) {
+      height: 300px;
+    }
   }
 
   .socials {

@@ -9,7 +9,8 @@ export const NewsSection = () => {
   const [news, setNews] = useState<INews[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
+  console.log(news);
+  
   useEffect(() => {
     const fetchNews = async () => {
       try {
@@ -25,6 +26,14 @@ export const NewsSection = () => {
     fetchNews();
   }, []);
 
+  const formatDate = (date: string): string => {
+    const dateObj = new Date(date);
+    const year = dateObj.getFullYear();
+    const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+    const day = String(dateObj.getDate()).padStart(2, "0");
+    return `${year}.${month}.${day}`;
+  };
+
   return (
     <div className={styles.wrapper}>
       <Container>
@@ -35,7 +44,7 @@ export const NewsSection = () => {
               <div className={styles.card}>
                 {news[0].filePath && (
                   <Image
-                    src={news[1].filePath}
+                    src={news[0].filePath}
                     alt="News Image"
                     className={styles.image}
                     width="400"
@@ -43,7 +52,7 @@ export const NewsSection = () => {
                   />
                 )}
                 <div className={styles.body}>
-                  <span>{news[0].date}</span>
+                  <span>{formatDate(news[0].createdDate)}</span>
                   <p className={styles.cardDescription}>{news[0].title}</p>
                 </div>
               </div>
@@ -52,9 +61,9 @@ export const NewsSection = () => {
           <div className={styles.otherNews}>
             <h3>Boshqa yangiliklar</h3>
             <div className={styles.items}>
-              {news.slice(1, 6).map((item) => (
+              {news.slice(1, 5).map((item) => (
                 <div key={item.id} className={styles.item}>
-                  <span></span>
+                  <span>{formatDate(item.createdDate)}</span>
                   <p className={styles.cardDescription}>{item.title}</p>
                 </div>
               ))}

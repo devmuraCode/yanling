@@ -36,7 +36,7 @@ const YandexMap: FC<YandexMapProps> = ({ latitude, longitude }) => {
     };
   }, [latitude, longitude]);
 
-  return <div id="yandex-map" style={{ width: "100%", height: "200px" }} />;
+  return <div id="yandex-map" style={{ width: "100%", height: "524px" }} />;
 };
 
 export default YandexMap;

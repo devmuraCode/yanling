@@ -1,9 +1,11 @@
 "use client";
-import Slider from "react-slick";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation } from "swiper/modules";
 import Container from "@/components/Container";
 import styles from "./LicensesSection.module.scss";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { getLicensesList, ILicense } from "@/services/getLicensesList";
@@ -23,82 +25,46 @@ export const LicensesSection = () => {
     fetchLicenses();
   }, []);
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 576,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  };
-
   return (
     <div className={styles.wrapper}>
       <Container>
         <h2 className={styles.title}>Sertifikatlar va patentlar</h2>
+
         <div className={styles.sliderContainer}>
-          <Slider {...settings}>
+          <Swiper
+            spaceBetween={20}
+            slidesPerView={4}
+            modules={[Navigation]}
+            navigation={{
+              nextEl: `.${styles.nextButton}`,
+              prevEl: `.${styles.prevButton}`,
+            }}
+            breakpoints={{
+              1024: { slidesPerView: 4 },
+              768: { slidesPerView: 2 },
+              576: { slidesPerView: 1 },
+            }}
+          >
             {licenses.map((license) =>
               license.files.map((file) => (
-                <div key={file.id} className={styles.card}>
+                <SwiperSlide key={file.id} className={styles.card}>
                   <Image
                     src={file.filePath}
-                    alt={license.title || "License Image"}
+                    alt={license.title || "Product Image"}
                     className={styles.image}
                     width={300}
                     height={300}
                     loading="lazy"
                   />
-                  <p className={styles.licenseTitle}>{license.title}</p>
-                </div>
+                  <p className={styles.productTitle}>{license.title}</p>
+                </SwiperSlide>
               ))
             )}
-          </Slider>
+          </Swiper>
+          <button className={`${styles.prevButton}`}><IoIosArrowBack/></button>
+          <button className={`${styles.nextButton}`}><IoIosArrowForward/></button>
         </div>
       </Container>
     </div>
-  );
-};
-
-const SampleNextArrow = (props: any) => {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={`${className} ${styles.nextArrow}`}
-      style={{ ...style, display: "block" }}
-      onClick={onClick}
-    />
-  );
-};
-
-const SamplePrevArrow = (props: any) => {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={`${className} ${styles.prevArrow}`}
-      style={{ ...style, display: "block" }}
-      onClick={onClick}
-    />
   );
 };

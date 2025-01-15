@@ -1,59 +1,75 @@
 "use client";
-import layer from "@/assets/layer.svg";
-
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Container from "../../../../components/Container";
 import styled from "./AboutSection.module.scss";
+import Link from "next/link";
+import { getCompanyInfo, CompanyInfo } from "@/services/getCompanyInfo";
+import layer from "@/assets/layer.svg";
 import para from "@/assets/para.svg";
 import hotel from "@/assets/hotel.svg";
-import Link from "next/link";
 
 export const AboutSection = () => {
+  const [companyInfo, setCompanyInfo] = useState<CompanyInfo | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchCompanyInfo = async () => {
+      try {
+        const data = await getCompanyInfo();
+        setCompanyInfo(data);
+      } catch (err) {
+        setError("Ошибка при загрузке информации о компании.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCompanyInfo();
+  }, []);
+
+  if (loading) {
+    return <div className={styled.loading}>Загрузка...</div>;
+  }
+
+  if (error) {
+    return <div className={styled.error}>{error}</div>;
+  }
+
+  if (!companyInfo) {
+    return <div className={styled.error}>Нет данных для отображения.</div>;
+  }
+
   return (
     <div className={styled.wrapper}>
       <Container>
         <div className={styled.container}>
           <div className={styled.content}>
-            <h1>Biz haqimizda</h1>
+            <h1>{companyInfo.name}</h1>
             <div className={styled.body}>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                est sapien, tincidunt vitae semper vel, mattis in magna. Morbi
-                consectetur massa nisl. Cras et lobortis arcu. Nullam feugiat et
-                libero et pharetra. Phasellus sed mollis enim. In vitae luctus
-                lorem. Sed sagittis risus sed tortor molestie scelerisque. Duis
-                malesuada sit amet quam quis semper.
+                {companyInfo.description.length > 100
+                  ? `${companyInfo.description.slice(0, 100)}...`
+                  : companyInfo.description}{" "}
+                <Link href="/about" className={styled.readMoreButton}>
+                  Читать дальше
+                </Link>
               </p>
-              <div className={styled.item}>
-                <Image src={layer} width={500} height={500} alt="" />
-                <div>
-                  <h2>O‘rnatish</h2>
-                  <p>
-                    Sizning hududingizga mos ravishda professional o‘rnatish.
-                  </p>
-                </div>
-              </div>
 
-              <div className={styled.item}>
-                <Image src={layer} width={500} height={500} alt="" />
-                <div>
-                  <h2>Texnik xizmat</h2>
-                  <p>
-                    {" "}
-                    Optimal ishlash uchun muntazam tekshiruvlar va texnik xizmat
-                    ko‘rsatish.
-                  </p>
+              {companyInfo.characteristicDTOS.map((characteristic) => (
+                <div key={characteristic.id} className={styled.item}>
+                  <Image src={layer} width={500} height={500} alt="" />
+                  <div>
+                    <h2>{characteristic.titleUz}</h2>
+                    <p>{characteristic.subTitleUz}</p>
+                  </div>
                 </div>
-              </div>
+              ))}
 
-              <div className={styled.item}>
-                <Image src={layer} width={500} height={500} alt="" />
-                <div>
-                  <h2>Moslashtirish</h2>
-                  <p>Sizning o‘ziga xos ehtiyojlaringiz uchun yechimlar.</p>
-                </div>
-              </div>
-              <Link href={"/about"} className={styled.btn}>Batafsil o’qish</Link>
+              <Link href={"/about"} className={styled.btn}>
+                Batafsil o’qish
+              </Link>
             </div>
           </div>
           <div className={styled.images}>

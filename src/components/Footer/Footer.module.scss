@@ -3,7 +3,15 @@
   background: #2f3133;
   color: #ffffff;
   font-family: "FuturaPT", Arial, sans-serif;
+  .readMoreButton {
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
 
+    &:hover {
+      text-decoration: none;
+    }
+  }
   .content {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -54,7 +62,8 @@
         }
       }
 
-      p, a {
+      p,
+      a {
         font-size: 14px;
         color: #d1d1d1;
 

@@ -62,47 +62,6 @@ const ContactSection = () => {
     <div className={styles.wrapper}>
       <Container>
         <div className={styles.contactSection}>
-          <div className={styles.formSection}>
-            <p>Заполните форму и наш менеджер свяжется с вами...</p>
-            <form className={styles.form} onSubmit={handleSubmit}>
-              <Input
-                type="text"
-                placeholder="Имя"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <Input
-                type="tel"
-                placeholder="Телефон"
-                required
-                value={phone}
-                onChange={handlePhoneChange}
-              />
-              <Input
-                type="email"
-                placeholder="Почта"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <Textarea
-                placeholder="Ваш вопрос"
-                required
-                className={styles.textarea}
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-              />
-              <button
-                type="submit"
-                className={styles.submitButton}
-                disabled={isPending}
-              >
-                {isPending ? "Отправка..." : "ОТПРАВИТЬ"}
-              </button>
-            </form>
-          </div>
-
           <div className={styles.infoSection}>
             {company ? <Adress company={company} /> : <p>Загрузка данных...</p>}
           </div>
