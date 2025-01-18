@@ -61,8 +61,8 @@ export const AboutSection = () => {
                 <div key={characteristic.id} className={styled.item}>
                   <Image src={layer} width={500} height={500} alt="" />
                   <div>
-                    <h2>{characteristic.titleUz}</h2>
-                    <p>{characteristic.subTitleUz}</p>
+                    <h2>{characteristic.title}</h2>
+                    <p>{characteristic.subTitle}</p>
                   </div>
                 </div>
               ))}

@@ -22,7 +22,7 @@ export const ProductsNew = () => {
       const data = await getCopanyProductsList();
       setProducts(data);
       setActiveCategory("firma");
-      setCurrentPage(1); // Сбросить на первую страницу при переключении категории
+      setCurrentPage(1);
     } catch (error) {
       console.error("Ошибка загрузки продуктов компании:", error);
     }
@@ -33,7 +33,7 @@ export const ProductsNew = () => {
       const data = await getShortInfoList();
       setProducts(data);
       setActiveCategory("xitoy");
-      setCurrentPage(1); // Сбросить на первую страницу при переключении категории
+      setCurrentPage(1);
     } catch (error) {
       console.error("Ошибка загрузки короткой информации о продуктах:", error);
     }

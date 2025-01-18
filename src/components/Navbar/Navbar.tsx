@@ -17,35 +17,33 @@ import Link from "next/link";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState(
-    localStorage.getItem("selectedLanguage") || "O’z"
-  );
+  const [selectedLanguage, setSelectedLanguage] = useState("O’z");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedLanguage = localStorage.getItem("selectedLanguage");
+      if (savedLanguage) {
+        setSelectedLanguage(savedLanguage);
+      }
+    }
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
-  const updateTranslations = async (languageCode: string) => {
-    try {
-      const translations = await fetchTranslations(languageCode);
-      console.log("Updated translations:", translations);
-    } catch (error) {
-      console.error("Error updating translations:", error);
-    }
-  };
-
   const handleLanguageSelect = async (languageCode: any, languageName: any) => {
     setSelectedLanguage(languageName);
     localStorage.setItem("selectedLanguage", languageCode);
-    console.log(`Selected language: ${languageCode}`);
-    await updateTranslations(languageCode);
-    setIsMenuOpen(false);
-  };
 
-  useEffect(() => {
-    const language = localStorage.getItem("selectedLanguage") || "ru";
-    updateTranslations(language);
-  }, []);
+    console.log(`Selected language: ${languageCode}`);
+
+  
+    setIsMenuOpen(false);
+
+    
+    window.location.reload();
+  };
 
   return (
     <div className={styles.wrapper}>

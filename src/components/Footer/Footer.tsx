@@ -114,8 +114,8 @@ export const Footer = () => {
               <Image src={location} alt="Адрес" />
               <p>
                 {address
-                  ? `${address.street}, ${address.house}, ${address.landmark}`
-                  : "Toshkent shahar, Qoraqamish 3/4, Turkiston ko’chasi, 45-uy"}
+                  ? `${address.address}`
+                  : `Адрес недоступен`}
               </p>
             </div>
           </div>

@@ -7,16 +7,14 @@ export interface Address {
   apartment: string;
   longitude: string;
   latitude: string;
+  address: string;
 }
 
 export interface Characteristic {
   id: number;
-  titleUz: string;
-  titleEn: string;
-  titleRu: string;
-  subTitleUz: string;
-  subTitleEn: string;
-  subTitleRu: string;
+  title: string;
+
+  subTitle: string;
 }
 
 export interface ContactType {
