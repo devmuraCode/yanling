@@ -12,7 +12,9 @@ import ProductCard from "../ProductCard/ProductCard";
 
 export const ProductsNew = () => {
   const [products, setProducts] = useState<CompanyProduct[] | null>(null);
-  const [activeCategory, setActiveCategory] = useState<string>("firma"); 
+  const [activeCategory, setActiveCategory] = useState<string>("firma");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [productsPerPage] = useState<number>(10);
   const router = useRouter();
 
   const fetchCompanyProducts = async () => {
@@ -20,6 +22,7 @@ export const ProductsNew = () => {
       const data = await getCopanyProductsList();
       setProducts(data);
       setActiveCategory("firma");
+      setCurrentPage(1); // Сбросить на первую страницу при переключении категории
     } catch (error) {
       console.error("Ошибка загрузки продуктов компании:", error);
     }
@@ -30,6 +33,7 @@ export const ProductsNew = () => {
       const data = await getShortInfoList();
       setProducts(data);
       setActiveCategory("xitoy");
+      setCurrentPage(1); // Сбросить на первую страницу при переключении категории
     } catch (error) {
       console.error("Ошибка загрузки короткой информации о продуктах:", error);
     }
@@ -46,6 +50,17 @@ export const ProductsNew = () => {
       console.error("Ошибка получения деталей продукта:", error);
     }
   };
+
+  // Определяем продукты для текущей страницы
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products
+    ? products.slice(indexOfFirstProduct, indexOfLastProduct)
+    : [];
+
+  const totalPages = products
+    ? Math.ceil(products.length / productsPerPage)
+    : 0;
 
   return (
     <div className={styles.wrapper}>
@@ -71,8 +86,8 @@ export const ProductsNew = () => {
             </button>
           </div>
           <div className={styles.productsSection}>
-            {products && products.length > 0 ? (
-              products.map((product) => (
+            {currentProducts && currentProducts.length > 0 ? (
+              currentProducts.map((product) => (
                 <ProductCard
                   key={product.id}
                   id={product.id}
@@ -87,6 +102,27 @@ export const ProductsNew = () => {
               <p>Нет продуктов в этой категории.</p>
             )}
           </div>
+          {products && products.length > productsPerPage && (
+            <div className={styles.pagination}>
+              <button
+                className={styles.paginationButton}
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage((prev) => prev - 1)}
+              >
+                Назад
+              </button>
+              <span>
+                 {currentPage} из {totalPages}
+              </span>
+              <button
+                className={styles.paginationButton}
+                disabled={currentPage === totalPages}
+                onClick={() => setCurrentPage((prev) => prev + 1)}
+              >
+                Вперед
+              </button>
+            </div>
+          )}
         </div>
       </Container>
     </div>

@@ -76,3 +76,40 @@
     }
   }
 }
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  list-style: none;
+  padding: 0;
+
+  .paginationButton {
+    margin: 0 5px;
+    padding: 8px 16px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+
+    &.active {
+      background-color: #1890ff;
+      color: #fff;
+      border-color: #1890ff;
+    }
+
+    &.disabled {
+      color: #bfbfbf;
+      cursor: not-allowed;
+    }
+  }
+}
