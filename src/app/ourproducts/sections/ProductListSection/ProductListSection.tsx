@@ -15,7 +15,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Loading from "@/app/Loading";
 
-export default function ProductListSection () {
+export default function ProductListSection() {
   const [products, setProducts] = useState<CompanyProduct[]>([]);
   const [productDetails, setProductDetails] = useState<IProductDetails | null>(
     null
@@ -82,4 +82,4 @@ export default function ProductListSection () {
       </Container>
     </div>
   );
-};
+}

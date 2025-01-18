@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import Container from "../Container";
 import Logo from "./Logo";
 import styles from "./Navbar.module.scss";
@@ -17,16 +17,35 @@ import Link from "next/link";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState(null);
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    localStorage.getItem("selectedLanguage") || "O’z"
+  );
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
-  const handleLanguageSelect = (language: any) => {
-    setSelectedLanguage(language);
+  const updateTranslations = async (languageCode: string) => {
+    try {
+      const translations = await fetchTranslations(languageCode);
+      console.log("Updated translations:", translations);
+    } catch (error) {
+      console.error("Error updating translations:", error);
+    }
+  };
+
+  const handleLanguageSelect = async (languageCode: any, languageName: any) => {
+    setSelectedLanguage(languageName);
+    localStorage.setItem("selectedLanguage", languageCode);
+    console.log(`Selected language: ${languageCode}`);
+    await updateTranslations(languageCode);
     setIsMenuOpen(false);
   };
+
+  useEffect(() => {
+    const language = localStorage.getItem("selectedLanguage") || "ru";
+    updateTranslations(language);
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -35,32 +54,36 @@ export const Navbar = () => {
           <Logo />
           <div className={styles.contact}>
             <p>+998 98 776 66 88</p>
-            <div className={styles.dropdown}></div>
-
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <div className="flex items-center cursor-pointer">
                   <IoIosArrowDown />
-                  <span>{selectedLanguage || "O’z"}</span>
+                  <span>{selectedLanguage}</span>
                 </div>
               </DropdownMenuTrigger>
 
               <DropdownMenuContent className="p-4 md:w-max">
                 <DropdownMenuItem asChild>
                   <Link
-                    href=""
-                    onClick={() => handleLanguageSelect("O’zbekcha")}
+                    href="#"
+                    onClick={() => handleLanguageSelect("uz", "O’zbekcha")}
                   >
                     O’zbekcha
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="" onClick={() => handleLanguageSelect("Русский")}>
+                  <Link
+                    href="#"
+                    onClick={() => handleLanguageSelect("ru", "Русский")}
+                  >
                     Русский
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="" onClick={() => handleLanguageSelect("English")}>
+                  <Link
+                    href="#"
+                    onClick={() => handleLanguageSelect("en", "English")}
+                  >
                     English
                   </Link>
                 </DropdownMenuItem>

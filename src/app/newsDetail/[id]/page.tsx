@@ -5,8 +5,7 @@ import Loading from "@/app/Loading";
 
 const ProductDetail: FC = () => {
   const { id } = useParams();
-    console.log(id);
-    
+  console.log(id);
 
   if (!id) {
     return (
@@ -16,11 +15,7 @@ const ProductDetail: FC = () => {
     );
   }
 
-  return (
-    <div>
-      
-    </div>
-  );
+  return <div></div>;
 };
 
 export default ProductDetail;

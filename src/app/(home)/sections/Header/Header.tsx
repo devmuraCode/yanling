@@ -15,8 +15,12 @@ export const Header = () => {
             Radar tizimlari va professional o‘rnatish xizmatlari
           </p>
           <div className={styles.buttons}>
-            <Link href={"/products"} className={styles.btn}>Bizning mahsulotlar</Link>
-            <Link href={"/about"} className={styles.btn}>Biz haqimizda</Link>
+            <Link href={"/products"} className={styles.btn}>
+              Bizning mahsulotlar
+            </Link>
+            <Link href={"/about"} className={styles.btn}>
+              Biz haqimizda
+            </Link>
           </div>
         </div>
         <div className={styles.imageContainer}>

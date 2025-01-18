@@ -4,8 +4,10 @@ import Link from "next/link";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { GrBottomCorner } from "react-icons/gr";
 import MenuItem from "./MenuList";
+import { useTranslation } from "react-i18next";
 
 const UserMenu: React.FC = () => {
+
   return (
     <div className="flex flex-col gap-7 md:flex-row">
       <Link href="/">

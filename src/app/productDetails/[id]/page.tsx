@@ -1,6 +1,9 @@
 "use client";
 import { useEffect, useState, FC } from "react";
-import { getProductDetails, IProductDetails } from "@/services/getProductDetails";
+import {
+  getProductDetails,
+  IProductDetails,
+} from "@/services/getProductDetails";
 import { useParams } from "next/navigation";
 import { DetailsCard } from "../sections/DetailsCard";
 import { getProductFieldDetails } from "@/services/getProductFiledDetails";
@@ -8,8 +11,12 @@ import Loading from "@/app/Loading";
 
 const ProductDetail: FC = () => {
   const { id } = useParams();
-  const [productDetails, setProductDetails] = useState<IProductDetails | null>(null);
-  const [productFieldDetails, setProductFieldDetails] = useState<any | null>(null);
+  const [productDetails, setProductDetails] = useState<IProductDetails | null>(
+    null
+  );
+  const [productFieldDetails, setProductFieldDetails] = useState<any | null>(
+    null
+  );
   console.log(id);
 
   useEffect(() => {
@@ -34,14 +41,18 @@ const ProductDetail: FC = () => {
   console.log(productFieldDetails);
 
   if (!productDetails) {
-    return <div><Loading/></div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
 
   return (
     <div>
       <DetailsCard
         {...productDetails}
-        productFieldCategories={productFieldDetails} 
+        productFieldCategories={productFieldDetails}
       />
     </div>
   );
