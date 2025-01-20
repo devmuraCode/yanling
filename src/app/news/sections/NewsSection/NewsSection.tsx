@@ -44,9 +44,17 @@ export const NewsSection = () => {
 
   if (loading) return <div>Загрузка...</div>;
   if (error) return <div>{error}</div>;
-  const handleProductClick = async (productId: number) => {
-    router.push(`/newsDetail/${productId}`);
-  };
+ const handleProductClick = (item: INews) => {
+   const queryString = new URLSearchParams({
+     title: item.title,
+     description: item.description,
+     filePath: item.filePath,
+     createdDate: item.createdDate,
+   }).toString();
+
+   router.push(`/newsDetail/${item.id}?${queryString}`);
+ };
+
   return (
     <div className={styles.wrapper}>
       <Container>
@@ -67,7 +75,7 @@ export const NewsSection = () => {
                 <span>{formatDate(item.createdDate)}</span>
                 <button
                   className={styles.btn}
-                  onClick={() => handleProductClick(item.id)}
+                  onClick={() => handleProductClick(item)}
                 >
                   Batafsil o’qish
                 </button>

@@ -38,9 +38,7 @@ export const ServiceSection = () => {
                   <p className={styles.cardDescription}>
                     {service.description}
                   </p>
-                  {service.topService && (
-                    <span className={styles.topBadge}>Top</span>
-                  )}
+                 
                 </div>
               </div>
             ))}

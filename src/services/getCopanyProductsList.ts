@@ -6,6 +6,7 @@ export interface CompanyProduct {
   title: string;
   description: string | null;
   filePath: string;
+  price: number;
 }
 
 export const getCopanyProductsList = async (): Promise<CompanyProduct[]> => {

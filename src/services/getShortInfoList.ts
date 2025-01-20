@@ -1,11 +1,16 @@
 import axiosInstance from "@/api/axiosInstance";
 
-export interface CompanyProduct {
+interface ProductFile {
   id: number;
-  fileId: number | null;
-  title: string;
-  description: string | null;
   filePath: string;
+  main: boolean;
+}
+interface CompanyProduct {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  files: ProductFile[];
 }
 
 export const getShortInfoList = async (): Promise<CompanyProduct[]> => {

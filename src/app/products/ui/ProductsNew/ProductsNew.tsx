@@ -31,9 +31,19 @@ export const ProductsNew = () => {
   const fetchShortInfoProducts = async () => {
     try {
       const data = await getShortInfoList();
-      setProducts(data);
+      const productsWithMainImage = data.map((product) => {
+        const mainImage =
+          product.files.find((file) => file.main) || product.files[0];
+        return {
+          ...product,
+          filePath: mainImage?.filePath || "",
+          fileId: product.id,
+          title: product.name,
+        };
+      });
+
+      setProducts(productsWithMainImage);
       setActiveCategory("xitoy");
-      setCurrentPage(1);
     } catch (error) {
       console.error("Ошибка загрузки короткой информации о продуктах:", error);
     }
@@ -51,7 +61,7 @@ export const ProductsNew = () => {
     }
   };
 
-  // Определяем продукты для текущей страницы
+
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = products

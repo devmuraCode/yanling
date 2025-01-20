@@ -10,9 +10,9 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { CompanyProduct } from "@/services/getCopanyProductsList";
 import ProductCard from "@/app/products/ui/ProductCard/ProductCard";
-import { getCopanyTopProducts } from "@/services/getCompantTopProducts";
 import { getChineseProducts } from "@/services/getChineseProducts";
 import Link from "next/link";
+import { getCompanyTopProducts } from "@/services/getCopanyTopProducts";
 
 export const ProductsSection = () => {
   const [products, setProducts] = useState<CompanyProduct[] | null>(null);
@@ -21,7 +21,8 @@ export const ProductsSection = () => {
 
   const fetchCompanyProducts = async () => {
     try {
-      const data = await getCopanyTopProducts();
+      const data = await getCompanyTopProducts();
+
       setProducts(data);
       setActiveCategory("firma");
     } catch (error) {
@@ -31,8 +32,19 @@ export const ProductsSection = () => {
 
   const fetchShortInfoProducts = async () => {
     try {
-      const data = await getChineseProducts();
-      setProducts(data);
+    const data = await getChineseProducts();
+    const productsWithMainImage = data.map((product) => {
+      const mainImage =
+        product.files.find((file) => file.main) || product.files[0];
+      return {
+        ...product,
+        filePath: mainImage?.filePath || "",
+        fileId: product.id,
+        title: product.name, 
+      };
+    });
+
+      setProducts(productsWithMainImage);
       setActiveCategory("xitoy");
     } catch (error) {
       console.error("Ошибка загрузки короткой информации о продуктах:", error);
@@ -92,11 +104,9 @@ export const ProductsSection = () => {
               products.map((product) => (
                 <SwiperSlide key={product.id} className={styles.card}>
                   <ProductCard
-                    key={product.id}
                     id={product.id}
                     image={product.filePath}
                     name={product.title}
-                    // @ts-ignore
                     price={product.price || 0}
                     onClick={() => handleProductClick(product.id)}
                   />
@@ -106,7 +116,9 @@ export const ProductsSection = () => {
               <p>Нет продуктов в этой категории.</p>
             )}
           </Swiper>
-          <Link href={"/products"} className={styles.btnnn}>Barcha mahsulotlar</Link>
+          <Link href={"/products"} className={styles.btnnn}>
+            Barcha mahsulotlar
+          </Link>
           <button className={`${styles.prevButton}`}>
             <IoIosArrowBack />
           </button>

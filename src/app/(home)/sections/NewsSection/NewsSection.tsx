@@ -4,6 +4,7 @@ import Container from "../../../../components/Container";
 import styles from "./NewsSection.module.scss";
 import { getNewsList, INews } from "@/services/getNewsList";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export const NewsSection = () => {
   const [news, setNews] = useState<INews[]>([]);
@@ -68,6 +69,7 @@ export const NewsSection = () => {
                 </div>
               ))}
             </div>
+            <Link href="/news" className={styles.button}>Barchasini o’qish</Link>
           </div>
         </div>
       </Container>

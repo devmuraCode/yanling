@@ -5,6 +5,9 @@ import Container from "@/components/Container";
 import Image from "next/image";
 import { getCompanyPartners } from "@/services/getCompanyPartners";
 import { getCompanyCustomers } from "@/services/getCompanyCustomers";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 interface Client {
   id: number;
@@ -27,11 +30,11 @@ export const ClientsSection = () => {
           : await getCompanyPartners();
 
       setClients(
-        data.map(({ id, name, webSite, filePath }: any) => ({
-          id,
-          name,
-          webSite,
-          filePath,
+        data.map((client: any) => ({
+          id: client.id,
+          name: client.name,
+          webSite: client.webSite,
+          filePath: client.filePath,
         }))
       );
     } catch (error) {
@@ -42,6 +45,27 @@ export const ClientsSection = () => {
   useEffect(() => {
     fetchClients(activeTab);
   }, [activeTab]);
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    autoplay: true,
+
+    autoplaySpeed: 2000,
+
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -65,25 +89,28 @@ export const ClientsSection = () => {
           </h3>
         </div>
 
-        <div className={styles.logos}>
+        <div className={styles.slickContainer}>
           {clients.length > 0 ? (
-            clients.map((client) => (
-              <a
-                key={client.id}
-                href={client.webSite}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src={client.filePath || "/assets/placeholder.svg"}
-                  alt={client.name}
-                  width={100}
-                  height={100}
-                />
-              </a>
-            ))
+            <Slider {...settings}>
+              {clients.map((client) => (
+                <div key={client.id} className={styles.clientCard}>
+                  <a
+                    href={client.webSite}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src={client.filePath || "/assets/placeholder.svg"}
+                      alt={client.name}
+                      width={200}
+                      height={200}
+                    />
+                  </a>
+                </div>
+              ))}
+            </Slider>
           ) : (
-            <p>Загрузка клиентов...</p>
+            <p className={styles.noData}>Нет данных для отображения</p>
           )}
         </div>
       </Container>
